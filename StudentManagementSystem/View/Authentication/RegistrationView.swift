@@ -1,0 +1,130 @@
+//
+//  RegistrationView.swift
+//  InstagramSwiftUITutorial
+//
+//  Created by Stephen Dowless on 12/27/20.
+//
+
+import SwiftUI
+
+struct RegistrationView: View {
+    @State private var email = ""
+    @State private var username = ""
+    @State private var role = ""
+    @State private var password = ""
+    @State private var no = ""
+    @State private var schoolName = ""
+
+    @State private var selectedImage: UIImage?
+    @State private var image: Image?
+    @State var imagePickerPresented = false
+    @Environment(\.presentationMode) var mode
+    @EnvironmentObject var viewModel: AuthViewModel
+    
+    var body: some View {
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            
+            VStack {
+                ZStack {
+                    if let image = image {
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 140, height: 140)
+                            .clipShape(Circle())
+                    } else {
+                        Button(action: { imagePickerPresented.toggle() }, label: {
+                            Image("pic")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 140, height: 140)
+                                .foregroundColor(.white)
+                        }).sheet(isPresented: $imagePickerPresented, onDismiss: loadImage, content: {
+                            ImagePicker(image: $selectedImage)
+                        })
+                    }
+                }
+                
+                VStack(spacing: 20) {
+                    CustomTextField(text: $email, placeholder: Text("Email"), imageName: "envelope")
+                        .padding()
+                        .background(Color(.init(white: 1, alpha: 0.15)))
+                        .cornerRadius(10)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 32)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                    
+                    CustomTextField(text: $username, placeholder: Text("Email"), imageName: "envelope")
+                        .padding()
+                        .background(Color(.init(white: 1, alpha: 0.15)))
+                        .cornerRadius(10)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 32)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        
+                    
+            
+
+                    CustomSecureField(text: $password, placeholder: Text("Password"))
+                        .padding()
+                        .background(Color(.init(white: 1, alpha: 0.15)))
+                        .cornerRadius(10)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 32)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                    
+                    Section(header: Text("Choose your status")) {
+                        Picker("Status", selection: $role) {
+                            Text("seller").tag("seller")
+                            Text("buyer").tag("buyer")
+                        }.pickerStyle(SegmentedPickerStyle())
+                    }.padding(.bottom, 20)
+ 
+                }
+                
+                Button(action: {
+                    viewModel.resgister(withEmail: email, password: password, image: selectedImage, username: username, role: role)
+                }, label: {
+                    Text("Sign Up")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(width: 360, height: 50)
+                        .background(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
+                        .clipShape(Capsule())
+                        .padding()
+                })
+                
+                Spacer()
+                
+                Button(action: { mode.wrappedValue.dismiss() }, label: {
+                    HStack {
+                        Text("Already have an account?")
+                            .font(.system(size: 14))
+                        
+                        Text("Sign In")
+                            .font(.system(size: 14, weight: .semibold))
+                    }.foregroundColor(.white)
+                })
+            }
+        }
+    }
+}
+
+extension RegistrationView {
+    func loadImage() {
+        guard let selectedImage = selectedImage else { return }
+        image = Image(uiImage: selectedImage)
+    }
+}
+
+struct RegistrationView_Previews: PreviewProvider {
+    static var previews: some View {
+        RegistrationView()
+    }
+}
