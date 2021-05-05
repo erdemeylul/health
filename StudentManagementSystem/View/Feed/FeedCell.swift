@@ -7,11 +7,18 @@
 
 import SwiftUI
 import Kingfisher
+import URLImage
 
 struct FeedCell: View {
     @ObservedObject var viewModel: FeedCellViewModel
+
+    @EnvironmentObject var auth: AuthViewModel
+    
+    @Environment(\.presentationMode) var presentationMode
     
     var didLike: Bool { return viewModel.post.didLike ?? false }
+    
+    @State var showActionSheet = false
     
     init(viewModel: FeedCellViewModel) {
         self.viewModel = viewModel
@@ -21,24 +28,35 @@ struct FeedCell: View {
         VStack(alignment: .leading) {
             // user info
             HStack {
-                KFImage(URL(string: viewModel.post.ownerImageUrl))
+                if let user = viewModel.post.user{
+                    NavigationLink(destination: ProfileView(user: user)) {
+                        URLImage(url: URL(string: viewModel.post.ownerImageUrl)!) {image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 36, height: 36)
+                                .clipped()
+                                .cornerRadius(18)}
+                        
+                       
+                        Text(viewModel.post.ownerUsername)
+                            .font(.system(size: 14, weight: .semibold))
+                    }
+                }
+            }
+            .padding(.bottom, 8)
+            .padding(.leading, 8)
+            .padding(.trailing, 12)
+            
+            URLImage(url: URL(string: viewModel.post.imageUrl)!) {image in
+                image
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 36, height: 36)
+                    .frame(width: UIScreen.main.bounds.width - 4, alignment: .center)
+                    .frame(maxHeight: 440)
                     .clipped()
-                    .cornerRadius(18)
-                
-                Text(viewModel.post.ownerUsername)
-                    .font(.system(size: 14, weight: .semibold))
+                    .padding(.leading, 2)
             }
-            .padding([.leading, .bottom], 8)
-            
-            // post image
-            KFImage(URL(string: viewModel.post.imageUrl))
-                .resizable()
-                .scaledToFill()
-                .frame(maxHeight: 440)
-                .clipped()
             
             // action buttons
             HStack(spacing: 16) {
@@ -62,15 +80,6 @@ struct FeedCell: View {
                         .font(.system(size: 20))
                         .padding(4)
                 }
-                
-                Button(action: {}, label: {
-                    Image(systemName: "paperplane")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 20, height: 20)
-                        .font(.system(size: 20))
-                        .padding(4)
-                })
             }
             .padding(.leading, 4)
             .foregroundColor(.black)
@@ -95,4 +104,23 @@ struct FeedCell: View {
                 .padding(.top, -2)
         }
     }
+    
+    func  getActionSheet() -> ActionSheet{
+        return ActionSheet(title: Text("Do you want to delete the post?"), message: nil, buttons: [
+            .destructive(Text("Delete"), action: {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    viewModel.deletePost()
+                }
+                
+            }),
+            
+            .default(Text("Learn more..."), action: {
+            }),
+            
+            .cancel()
+        ])
+    }
 }
+
+

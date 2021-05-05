@@ -1,9 +1,3 @@
-//
-//  UserListView.swift
-//  InstagramSwiftUITutorial
-//
-//  Created by Stephen Dowless on 12/26/20.
-//
 
 import SwiftUI
 

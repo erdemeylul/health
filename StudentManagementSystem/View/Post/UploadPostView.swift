@@ -1,9 +1,3 @@
-//
-//  UploadPostView.swift
-//  InstagramSwiftUITutorial
-//
-//  Created by Stephen Dowless on 12/26/20.
-//
 
 import SwiftUI
 
@@ -27,9 +21,10 @@ struct UploadPostView: View {
                         .clipped()
                         .padding(.top, 56)
                         .foregroundColor(.black)
-                }).sheet(isPresented: $imagePickerPresented, onDismiss: loadImage, content: {
-                    ImagePicker(image: $selectedImage)
                 })
+//                .sheet(isPresented: $imagePickerPresented, onDismiss: loadImage, content: {
+//                    ImagePicker(image: $selectedImage)
+//                })
             } else if let image = postImage {
                 HStack(alignment: .top) {
                     image
@@ -40,6 +35,7 @@ struct UploadPostView: View {
                     
                     TextArea(text: $captionText, placeholder: "Enter your caption..")
                         .frame(height: 200)
+                        .background(Color.purple.opacity(0.12))
                 }.padding()
                 
                 HStack(spacing: 16) {
@@ -79,10 +75,10 @@ struct UploadPostView: View {
     }
 }
 
-extension UploadPostView {
-    func loadImage() {
-        guard let selectedImage = selectedImage else { return }
-        postImage = Image(uiImage: selectedImage)
-    }
-}
+//extension UploadPostView {
+//    func loadImage() {
+//        guard let selectedImage = selectedImage else { return }
+//        postImage = Image(uiImage: selectedImage)
+//    }
+//}
 

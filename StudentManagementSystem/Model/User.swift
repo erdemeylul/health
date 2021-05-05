@@ -1,9 +1,4 @@
-//
-//  UserVIewModel.swift
-//  StudentManagementSystem
-//
-//  Created by Erdem Senol on 17.04.2021.
-//
+
 
 import FirebaseFirestoreSwift
 

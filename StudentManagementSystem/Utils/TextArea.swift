@@ -1,9 +1,3 @@
-//
-//  TextArea.swift
-//  InstagramSwiftUITutorial
-//
-//  Created by Stephen Dowless on 12/31/20.
-//
 
 import SwiftUI
 

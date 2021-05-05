@@ -12,6 +12,7 @@ class EditProfileViewModel: ObservableObject{
     var user: User
     @Published var uploadComplete = false
     
+    
     init(user: User){
         self.user = user
     }

@@ -1,12 +1,8 @@
-//
-//  PostGridView.swift
-//  InstagramSwiftUITutorial
-//
-//  Created by Stephen Dowless on 12/26/20.
-//
+
 
 import SwiftUI
 import Kingfisher
+import URLImage
 
 struct PostGridView: View {
     private let items = [GridItem(), GridItem(), GridItem()]
@@ -14,7 +10,10 @@ struct PostGridView: View {
 
     let config: PostGridConfiguration
     @ObservedObject var viewModel: PostGridViewModel
+    
 
+    @State var isPresented = false
+    
     init(config: PostGridConfiguration) {
         self.config = config
         self.viewModel = PostGridViewModel(config: config)
@@ -24,14 +23,19 @@ struct PostGridView: View {
         LazyVGrid(columns: items, spacing: 2, content: {
             ForEach(viewModel.posts) { post in
                 NavigationLink(
-                    destination: FeedCell(viewModel: FeedCellViewModel(post: post)),
+                    destination: PostFeed(viewModel: FeedCellViewModel(post: post)),
                     label: {
-                        KFImage(URL(string: post.imageUrl))
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: width, height: width)
-                            .clipped()
+                        URLImage(url: URL(string: post.imageUrl)!) {image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: width, height: width)
+                                .clipped()}
                     })
+            }.onAppear{
+                if config == .explore {
+                    viewModel.fetchExplorePagePosts()
+                }
             }
         })
     }

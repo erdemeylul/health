@@ -1,9 +1,4 @@
-//
-//  Constants.swift
-//  InstagramSwiftUITutorial
-//
-//  Created by Stephen Dowless on 12/29/20.
-//
+
 
 import Firebase
 

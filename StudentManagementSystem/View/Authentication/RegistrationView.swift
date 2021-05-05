@@ -14,12 +14,14 @@ struct RegistrationView: View {
     @State private var password = ""
     @State private var no = ""
     @State private var schoolName = ""
+    @State var sourceType: UIImagePickerController.SourceType = UIImagePickerController.SourceType.photoLibrary
 
     @State private var selectedImage: UIImage?
     @State private var image: Image?
     @State var imagePickerPresented = false
     @Environment(\.presentationMode) var mode
     @EnvironmentObject var viewModel: AuthViewModel
+    
     
     var body: some View {
         ZStack {
@@ -35,7 +37,9 @@ struct RegistrationView: View {
                             .frame(width: 140, height: 140)
                             .clipShape(Circle())
                     } else {
-                        Button(action: { imagePickerPresented.toggle() }, label: {
+                        Button(action: {
+                                imagePickerPresented.toggle()
+                                sourceType = UIImagePickerController.SourceType.photoLibrary }, label: {
                             Image("pic")
                                 .renderingMode(.template)
                                 .resizable()
@@ -43,7 +47,7 @@ struct RegistrationView: View {
                                 .frame(width: 140, height: 140)
                                 .foregroundColor(.white)
                         }).sheet(isPresented: $imagePickerPresented, onDismiss: loadImage, content: {
-                            ImagePicker(image: $selectedImage)
+                            ImagePicker(image: $selectedImage, sourceType: $sourceType)
                         })
                     }
                 }
@@ -58,7 +62,7 @@ struct RegistrationView: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                     
-                    CustomTextField(text: $username, placeholder: Text("Email"), imageName: "envelope")
+                    CustomTextField(text: $username, placeholder: Text("Username"), imageName: "person.crop.circle.fill")
                         .padding()
                         .background(Color(.init(white: 1, alpha: 0.15)))
                         .cornerRadius(10)
@@ -123,8 +127,8 @@ extension RegistrationView {
     }
 }
 
-struct RegistrationView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegistrationView()
-    }
-}
+//struct RegistrationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RegistrationView()
+//    }
+//}

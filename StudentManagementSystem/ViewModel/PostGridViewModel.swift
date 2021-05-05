@@ -8,13 +8,14 @@
 import SwiftUI
 import Firebase
 
-enum PostGridConfiguration{
+enum PostGridConfiguration: Equatable{
     case explore
     case profile(String)
 }
 
 class PostGridViewModel: ObservableObject{
     @Published var posts = [Post]()
+    
     let config: PostGridConfiguration
     
     init(config: PostGridConfiguration){

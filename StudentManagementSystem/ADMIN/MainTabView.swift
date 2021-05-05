@@ -1,13 +1,9 @@
-//
-//  MainTabView.swift
-//  InstagramSwiftUITutorial
-//
-//  Created by Stephen Dowless on 12/26/20.
-//
+
 
 import SwiftUI
 
 struct MainTabView: View {
+    
     let user: User
     @Binding var selectedIndex: Int
     
@@ -30,7 +26,7 @@ struct MainTabView: View {
                         Image(systemName: "magnifyingglass")
                     }.tag(1)
                 
-                UploadPostView(tabIndex: $selectedIndex)
+                PhotoUploadView(tabIndex: $selectedIndex)
                     .onTapGesture {
                         selectedIndex = 2
                     }
@@ -56,7 +52,16 @@ struct MainTabView: View {
             }
             .navigationTitle(tabTitle)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: logoutButton)
+            .navigationBarItems(leading: logoutButton, trailing: NavigationLink(
+                destination: ConversationListView(),
+                label: {
+                    Image(systemName: "envelope.circle")
+                        .font(.system(size:33))
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Color.green)
+                        .frame(width: 60, height:60)
+                }))
+
             .accentColor(.black)
         }
     }
@@ -78,6 +83,7 @@ struct MainTabView: View {
         case 2: return "Post"
         case 3: return "Notifications"
         case 4: return "Profile"
+
         default: return ""
         }
     }

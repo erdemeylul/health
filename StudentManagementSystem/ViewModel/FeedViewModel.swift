@@ -9,18 +9,18 @@ import Firebase
 
 
 class FeedViewModel: ObservableObject{
-    @Published  var posts = [Post]()
+    @Published var posts = [Post]()
     
     init(){
         fetchPosts()
     }
     
     func fetchPosts(){
-        Firestore.firestore().collection("posts").order(by: "timestamp", descending: true).getDocuments { snapshot, _ in
+        Firestore.firestore().collection("posts").order(by: "timestamp", descending: true).limit(to: 50).getDocuments { snapshot, _ in
             guard let documents = snapshot?.documents else {return}
             self.posts = documents.compactMap({try? $0.data(as: Post.self)})
-
-            print(self.posts)
         }
     }
+    
+    
 }

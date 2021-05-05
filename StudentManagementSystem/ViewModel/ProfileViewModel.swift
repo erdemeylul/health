@@ -10,11 +10,31 @@ import Firebase
 
 class ProfileViewModel: ObservableObject{
     @Published var user: User
+    var man: User?
+    @Published var rating: Double = 0.0
+    @Published var ratings = [RatingDoc]()
+    @Published var ratingOwners: [String] = []
+    @Published var ratingMean:[Int] = []
+    @Published var total = 0
     
+    @Published var uploadComplete = false
+    
+    @Published var following = 0
+    @Published var followers = 0
+    @Published var posts = 0
+    @Published var bio = ""
+    
+    @Published var userPosts = [Post]()
+
     init(user: User){
         self.user = user
         checkIfUserIsFollow()
-        fetchUserStats()
+        fetchBio()
+        fetchUserFollowers()
+        fetchUserFollowing()
+        fetchUserPosts()
+        fetchUserPostsAll()
+        getRating()
     }
     
     func follow(){
@@ -22,6 +42,9 @@ class ProfileViewModel: ObservableObject{
         UserService.follow(uid:uid){ _ in
             NotificationsViewModel.uploadNotification(toUid: uid, type: .follow)
             self.user.isFollowed = true
+            self.fetchUserFollowers()
+            self.fetchUserFollowing()
+            
         }
     }
     
@@ -29,6 +52,8 @@ class ProfileViewModel: ObservableObject{
         guard let uid = user.id else {return}
         UserService.unFollow(uid:uid){ _ in
             self.user.isFollowed = false
+            self.fetchUserFollowers()
+            self.fetchUserFollowing()
         }
     }
     
@@ -51,9 +76,89 @@ class ProfileViewModel: ObservableObject{
                 Firestore.firestore().collection("posts").whereField("ownerUid", isEqualTo: uid).getDocuments {snapshot, _ in
                     guard let posts = snapshot?.documents.count else {return}
                     self.user.stats = UserStats(following: following, posts: posts, followers: followers)
+                    print("fetched")
                 }
             }
         }
+    }
+    
+    func fetchUserFollowing(){
+        guard let uid = user.id else {return}
+        Firestore.firestore().collection("following").document(uid).collection("user-following").getDocuments { snapshot, _ in
+            self.following = snapshot?.documents.count ?? 0
+        }
+    }
+    func fetchUserFollowers(){
+        guard let uid = user.id else {return}
+        Firestore.firestore().collection("followers").document(uid).collection("user-followers").getDocuments { snapshot, _ in
+            self.followers = snapshot?.documents.count ?? 0
+        }
+    }
+    func fetchUserPosts(){
+        guard let uid = user.id else {return}
+        Firestore.firestore().collection("posts").whereField("ownerUid", isEqualTo: uid).getDocuments { snapshot, _ in
+            self.posts = snapshot?.documents.count ?? 0
+        }
+    }
+    
+    func saveUserBio(_ bio: String){
+        guard let uid = user.id else {return}
+        
+        Firestore.firestore().collection("users").document(uid).updateData(["bio": bio]) { _ in
+            self.user.bio = bio
+            self.uploadComplete = true
+            self.fetchBio()
+        }
+    }
+    
+    func fetchBio(){
+        guard let uid = user.id else {return}
+        Firestore.firestore().collection("users").document(uid).getDocument { snapshot, _ in
+            self.man = try? snapshot?.data(as: User.self)
+            self.bio = self.man?.bio ?? ""
+            print(self.bio)
+        }
+    }
 
+    func recordRating(rating: Double, userId: String){
+        guard let uid = AuthViewModel.shared.userSession?.uid else {return}
+
+        let data = [
+            "rating" : rating,
+            "owner" : uid
+        ] as [String : Any]
+        
+        Firestore.firestore().collection("users").document(userId).collection("ratings").document(uid).setData(data)
+    }
+    
+    func getRating(){
+        guard let uid = user.id else {return}
+
+        Firestore.firestore().collection("users").document(uid).collection("ratings").getDocuments { (snapshot, _) in
+            guard let documents = snapshot?.documents else {return}
+            self.ratings = documents.compactMap({try? $0.data(as: RatingDoc.self)})
+            print(self.ratings)
+            for rating in self.ratings{
+                self.ratingOwners.append(rating.owner)
+                self.ratingMean.append(rating.rating)
+                if self.ratingMean.count > 0 {
+                    self.total = self.ratingMean.reduce(0, +)
+                }
+            }
+            print(self.ratingOwners)
+            print(self.ratingMean)
+            print(self.total)
+            print(self.ratingMean.count)
+        }
+    }
+    
+    func fetchUserPostsAll(){
+        guard let uid = user.id else {return}
+
+        Firestore.firestore().collection("posts").whereField("ownerUid", isEqualTo: uid).getDocuments {snapshot, _ in
+            guard let documents = snapshot?.documents else {return}
+            let posts = documents.compactMap({try? $0.data(as: Post.self)})
+            self.userPosts = posts.sorted(by: {$0.timestamp.dateValue() > $1.timestamp.dateValue()})
+        }
     }
 }

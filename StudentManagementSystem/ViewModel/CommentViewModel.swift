@@ -11,7 +11,7 @@ import SwiftUI
 import Firebase
 
 class CommentViewModel: ObservableObject{
-    private let post: Post
+    let post: Post
     @Published var comments = [Comment]()
     
    
@@ -63,4 +63,6 @@ class CommentViewModel: ObservableObject{
 //            })
         }
     }
+    
+    
 }

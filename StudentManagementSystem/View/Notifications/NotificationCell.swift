@@ -47,22 +47,23 @@ struct NotificationCell: View {
                             .clipped()
                     }
                 }
-            } else {
-                Button(action: {
-                    isFollowed ? viewModel.unFollow() : viewModel.follow()
-                }, label: {
-                    Text(isFollowed ? "Following" : "Follow")
-                        .font(.system(size: 14, weight: .semibold))
-                        .frame(width: 100, height: 32)
-                        .foregroundColor(isFollowed ? .black : .white)
-                        .background(isFollowed ? Color.white : Color.blue)
-                        .cornerRadius(3)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 3)
-                                .stroke(Color.gray, lineWidth: isFollowed ? 1 : 0)
-                        )
-                })
             }
+//            } else {
+//                Button(action: {
+//                    isFollowed ? viewModel.unFollow() : viewModel.follow()
+//                }, label: {
+//                    Text(isFollowed ? "Following" : "Follow")
+//                        .font(.system(size: 14, weight: .semibold))
+//                        .frame(width: 100, height: 32)
+//                        .foregroundColor(isFollowed ? .black : .white)
+//                        .background(isFollowed ? Color.white : Color.blue)
+//                        .cornerRadius(3)
+//                        .overlay(
+//                            RoundedRectangle(cornerRadius: 3)
+//                                .stroke(Color.gray, lineWidth: isFollowed ? 1 : 0)
+//                        )
+//                })
+//            }
             
         }.padding(.horizontal)
     }

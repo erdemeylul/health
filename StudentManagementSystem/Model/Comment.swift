@@ -8,7 +8,7 @@
 import FirebaseFirestoreSwift
 import Firebase
 
-struct Comment: Codable, Identifiable{
+struct Comment: Decodable, Identifiable{
     @DocumentID var id: String?
     let username: String
     let postOwnerUid: String
@@ -16,6 +16,8 @@ struct Comment: Codable, Identifiable{
     let commentText: String
     let timestamp: Timestamp
     let uid: String
+    var user: User?
+
     
     var timestampString: String? {
         let formatter = DateComponentsFormatter()

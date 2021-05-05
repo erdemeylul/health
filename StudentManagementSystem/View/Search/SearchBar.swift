@@ -1,9 +1,3 @@
-//
-//  SearchBar.swift
-//  InstagramSwiftUITutorial
-//
-//  Created by Stephen Dowless on 12/26/20.
-//
 
 import SwiftUI
 
@@ -40,7 +34,8 @@ struct SearchBar: View {
                         .foregroundColor(.black)
                 })
                 .padding(.trailing, 8)
-                .transition(.move(edge: .trailing))
+                //.transition(.move(edge: .trailing))
+                .opacity(isEditing ? 1 : 0)
                 .animation(.default)
             }
         }

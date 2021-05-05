@@ -12,11 +12,13 @@ struct FeedView: View {
     
     var body: some View {
         ScrollView{
-            LazyVStack(spacing: 32){
+            VStack(spacing: 32){
                 ForEach(viewModel.posts){ post in
                     FeedCell(viewModel: FeedCellViewModel(post: post))
+                    //PostFeed(viewModel: FeedCellViewModel(post: post))
                 }
-            }.padding(.top)
+            }
+            .padding(.top)
         }
     }
 }
