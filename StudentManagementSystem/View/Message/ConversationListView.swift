@@ -32,12 +32,20 @@ struct ConversationListView: View {
                                 ForEach(model.users){ user in
                                     if name == user.id {
 
-                                        KFImage(URL(string: user.profileImageUrl))
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 45, height: 45)
-                                            .clipShape(Circle())
-                                            .padding()
+//                                        KFImage(URL(string: user.profileImageUrl))
+//                                            .resizable()
+//                                            .scaledToFill()
+//                                            .frame(width: 45, height: 45)
+//                                            .clipShape(Circle())
+//                                            .padding()
+                                        URLImage(url: URL(string: user.profileImageUrl)!) {image in
+                                            image
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 45, height: 45)
+                                                .clipShape(Circle())
+                                                .padding()}
+                                        
                                         Text(user.username)
                                             .bold()
                                             .foregroundColor(.black)

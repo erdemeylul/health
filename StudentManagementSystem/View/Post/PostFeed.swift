@@ -28,6 +28,22 @@ struct PostFeed: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            HStack{
+                Spacer()
+                Button(action: {
+                    showActionSheet.toggle()
+                }, label: {
+                    if auth.currentUser?.id == viewModel.post.ownerUid{
+                        Image("del")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 100, alignment: .center)
+                            .shadow(radius: 12)
+                    }
+                })
+                Spacer()
+            }
+            
             // user info
             HStack {
 
@@ -49,13 +65,13 @@ struct PostFeed: View {
                 }
                  
                 Spacer()
-                Button(action: {
-                    showActionSheet.toggle()
-                }, label: {
-                    if auth.currentUser?.id == viewModel.post.ownerUid{
-                        Image(systemName: "ellipsis")
-                    }
-                })
+//                Button(action: {
+//                    showActionSheet.toggle()
+//                }, label: {
+//                    if auth.currentUser?.id == viewModel.post.ownerUid{
+//                        Image(systemName: "ellipsis")
+//                    }
+//                })
                 .actionSheet(isPresented: $showActionSheet, content: {
                     ActionSheet(title: Text("What do you want to do?"), message: nil, buttons: [
                         .default(Text("Delete")){

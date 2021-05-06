@@ -30,6 +30,7 @@ class FeedViewModel: ObservableObject{
             guard let documents = snapshot?.documents else {return}
 
             self.users = documents.compactMap({ $0.documentID })
+            self.users.append(uid)
             print("DEBUG \(self.users)")
             if self.users.count > 0 {
                 Firestore.firestore().collection("posts").whereField("ownerUid", in: self.users).getDocuments { (snapshot, _) in

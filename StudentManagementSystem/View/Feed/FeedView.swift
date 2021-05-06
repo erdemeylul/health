@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FeedView: View {
     @StateObject var viewModel = FeedViewModel()
+    @State var show = false
     
     var body: some View {
         ScrollView{
@@ -19,11 +20,15 @@ struct FeedView: View {
                         //PostFeed(viewModel: FeedCellViewModel(post: post))
                     }
                 }else{
-                    Text("Follow sellers to get posts here")
+                    Text("Follow sellers to get posts here").opacity(show ? 1 : 0)
                 }
             }.onAppear{
                 //viewModel.fetchPosts()
                 viewModel.fetchFollowers()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    show = true
+                }
+
             }
             .padding(.top)
         }

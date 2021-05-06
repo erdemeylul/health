@@ -1,9 +1,4 @@
-//
-//  FeedCell.swift
-//  InstagramSwiftUITutorial
-//
-//  Created by Stephen Dowless on 12/26/20.
-//
+
 
 import SwiftUI
 import Kingfisher
@@ -34,29 +29,32 @@ struct FeedCell: View {
                             image
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 36, height: 36)
+                                .frame(width: 45, height: 45)
                                 .clipped()
                                 .cornerRadius(18)}
+                        
+
                         
                        
                         Text(viewModel.post.ownerUsername)
                             .font(.system(size: 14, weight: .semibold))
                     }
                 }
-            }
+            }.frame(minHeight: 45)
             .padding(.bottom, 8)
             .padding(.leading, 8)
             .padding(.trailing, 12)
             
-            URLImage(url: URL(string: viewModel.post.imageUrl)!) {image in
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: UIScreen.main.bounds.width - 4, alignment: .center)
-                    .frame(maxHeight: 440)
-                    .clipped()
-                    .padding(.leading, 2)
-            }
+            VStack{
+                URLImage(url: URL(string: viewModel.post.imageUrl)!) {image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: UIScreen.main.bounds.width, alignment: .center)
+                        .frame(maxHeight: 440)
+                        .clipped()
+                }
+            }.frame(minHeight: 440)
             
             // action buttons
             HStack(spacing: 16) {
@@ -80,6 +78,7 @@ struct FeedCell: View {
                         .font(.system(size: 20))
                         .padding(4)
                 }
+                Spacer()
             }
             .padding(.leading, 4)
             .foregroundColor(.black)
