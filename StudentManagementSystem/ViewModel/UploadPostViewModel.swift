@@ -29,13 +29,13 @@ class UploadPostViewModel: ObservableObject{
             Firestore.firestore().collection("posts").addDocument(data: data, completion: completion)
         }
         
-        fetchPosts()
+//        fetchPosts()
     }
     
-    func fetchPosts(){
-        Firestore.firestore().collection("posts").order(by: "timestamp", descending: true).limit(to: 50).getDocuments { snapshot, _ in
-            guard let documents = snapshot?.documents else {return}
-            self.posts = documents.compactMap({try? $0.data(as: Post.self)})
-        }
-    }
+//    func fetchPosts(){
+//        Firestore.firestore().collection("posts").order(by: "timestamp", descending: true).limit(to: 50).getDocuments { snapshot, _ in
+//            guard let documents = snapshot?.documents else {return}
+//            self.posts = documents.compactMap({try? $0.data(as: Post.self)})
+//        }
+//    }
 }
