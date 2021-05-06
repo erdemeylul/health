@@ -1,18 +1,20 @@
-//
-//  FeedViewModel.swift
-//  StudentManagementSystem
-//
-//  Created by Erdem Senol on 23.04.2021.
-//
+
 
 import Firebase
 
 
 class FeedViewModel: ObservableObject{
     @Published var posts = [Post]()
+    @Published var users: [String] = []
+    
+    static let shared = FeedViewModel()
+
+    
     
     init(){
-        fetchPosts()
+        //fetchPosts()
+        fetchFollowers()
+        //fetchFollowingPosts()
     }
     
     func fetchPosts(){
@@ -21,6 +23,35 @@ class FeedViewModel: ObservableObject{
             self.posts = documents.compactMap({try? $0.data(as: Post.self)})
         }
     }
+    
+    func fetchFollowers(){
+        guard let uid = AuthViewModel.shared.userSession?.uid else {return}
+        Firestore.firestore().collection("following").document(uid).collection("user-following").getDocuments { (snapshot, _) in
+            guard let documents = snapshot?.documents else {return}
+
+            self.users = documents.compactMap({ $0.documentID })
+            print("DEBUG \(self.users)")
+            if self.users.count > 0 {
+                Firestore.firestore().collection("posts").whereField("ownerUid", in: self.users).getDocuments { (snapshot, _) in
+                    guard let documents = snapshot?.documents else {return print("no users")}
+                    self.posts = documents.compactMap({try? $0.data(as: Post.self)})
+                }
+            }
+        }
+    }
+    
+//    func fetchFollowingPosts(){
+//        if self.users.count > 0{
+//            Firestore.firestore().collection("posts").whereField("ownerUid", in: self.users).getDocuments { (snapshot, _) in
+//                guard let documents = snapshot?.documents else {return print("no users")}
+//                self.posts = documents.compactMap({try? $0.data(as: Post.self)})
+//                print(self.posts)
+//                print("hehe")
+//            }
+//        }else{
+//            print("")
+//        }
+//    }
     
     
 }

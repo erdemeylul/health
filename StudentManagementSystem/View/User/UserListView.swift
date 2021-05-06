@@ -12,6 +12,7 @@ struct UserListView: View {
     var body: some View {
         ScrollView {
             LazyVStack {
+                Text("Seller List")
                 ForEach(users) { user in
                     NavigationLink(
                         destination: LazyView(ProfileView(user: user)),

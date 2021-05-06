@@ -44,6 +44,8 @@ class ProfileViewModel: ObservableObject{
             self.user.isFollowed = true
             self.fetchUserFollowers()
             self.fetchUserFollowing()
+            //FeedViewModel.shared.fetchFollowers()
+
             
         }
     }
@@ -54,6 +56,8 @@ class ProfileViewModel: ObservableObject{
             self.user.isFollowed = false
             self.fetchUserFollowers()
             self.fetchUserFollowing()
+            //FeedViewModel.shared.fetchFollowers()
+
         }
     }
     

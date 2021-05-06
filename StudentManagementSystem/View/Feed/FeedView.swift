@@ -8,23 +8,26 @@
 import SwiftUI
 
 struct FeedView: View {
-    @ObservedObject var viewModel = FeedViewModel()
+    @StateObject var viewModel = FeedViewModel()
     
     var body: some View {
         ScrollView{
             VStack(spacing: 32){
-                ForEach(viewModel.posts){ post in
-                    FeedCell(viewModel: FeedCellViewModel(post: post))
-                    //PostFeed(viewModel: FeedCellViewModel(post: post))
+                if !viewModel.users.isEmpty{
+                    ForEach(viewModel.posts){ post in
+                        FeedCell(viewModel: FeedCellViewModel(post: post))
+                        //PostFeed(viewModel: FeedCellViewModel(post: post))
+                    }
+                }else{
+                    Text("Follow sellers to get posts here")
                 }
+            }.onAppear{
+                //viewModel.fetchPosts()
+                viewModel.fetchFollowers()
             }
             .padding(.top)
         }
     }
+    
 }
 
-struct FeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedView()
-    }
-}
