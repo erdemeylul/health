@@ -34,6 +34,7 @@ struct ChatView: View {
     @State var userImageUrl: String = ""
     
     @State var user: User?
+    
 
     
     init(otherUsername: String){
@@ -152,11 +153,11 @@ struct ChatView: View {
     }
 }
 
-struct ChatView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatView(otherUsername: "erdem")
-    }
-}
+//struct ChatView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ChatView(otherUsername: "erdem")
+//    }
+//}
 
 #if canImport(UIKit)
 extension View {

@@ -45,17 +45,30 @@ struct ConversationListView: View {
                                                 .frame(width: 45, height: 45)
                                                 .clipShape(Circle())
                                                 .padding()}
-                                        
                                         Text(user.username)
                                             .bold()
                                             .foregroundColor(.black)
                                             .font(.system(size: 32))
+//                                        if model.unreadMessages.contains(name){
+//                                            Circle()
+//                                                .fill(Color.red)
+//                                        }else{
+//                                            Circle()
+//                                                .fill(Color.green)
+//                                        }
+//                                        Spacer()
+//                                        Image(systemName: "chevron.right")
                                     }
                                 }
                                 Spacer()
                             }.onAppear{
                                 model.otherUsername = name
+                                print("DEBUG \(model.unreadMessages)\(name)")
                             }
+//                            .simultaneousGesture(TapGesture().onEnded{
+//                                model.unreadMessages.removeAll{$0 == name}
+//                            })
+
                             Divider()
 
                             .padding(5)

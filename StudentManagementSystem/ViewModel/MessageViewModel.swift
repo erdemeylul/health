@@ -29,6 +29,8 @@ class MessageViewModel: ObservableObject{
     @Published var conversations: [String] = []
     @Published var users = [User]()
     
+    @Published var unreadMessages: [String] = []
+    
     var cancellable: AnyCancellable? = nil
     @Published var keyboardIsShowing: Bool = false
 
@@ -54,7 +56,7 @@ class MessageViewModel: ObservableObject{
             "text": text,
             "sender": user.username,
             "created": dateString
-        ]
+        ] as [String : Any]
         
         Firestore.firestore().collection("users").document(uid).collection("chats").document(otherUsername).collection("messages").document(newMessageId).setData(data)
         
@@ -64,21 +66,24 @@ class MessageViewModel: ObservableObject{
     func createConversation(){
         //guard let user = AuthViewModel.shared.currentUser else {return}
         guard let uid = AuthViewModel.shared.userSession?.uid else {return}
+        let dateString = ISO8601DateFormatter().string(from: Date())
 
-        Firestore.firestore().collection("users").document(uid).collection("chats").document(otherUsername).setData(["created":"true"])
-        Firestore.firestore().collection("users").document(otherUsername).collection("chats").document(uid).setData(["created":"true"])
+
+        Firestore.firestore().collection("users").document(uid).collection("chats").document(otherUsername).setData(["created": dateString])
+        Firestore.firestore().collection("users").document(otherUsername).collection("chats").document(uid).setData(["created": dateString])
     }
     
     func getConversations(){
         //guard let user = AuthViewModel.shared.currentUser else {return}
         guard let uid = AuthViewModel.shared.userSession?.uid else {return}
 
-        conversationListener = Firestore.firestore().collection("users").document(uid).collection("chats").addSnapshotListener {[weak self] snapshot, error in
+        conversationListener = Firestore.firestore().collection("users").document(uid).collection("chats").order(by: "created", descending: true).addSnapshotListener {[weak self] snapshot, error in
             guard let userIds = snapshot?.documents.compactMap({ $0.documentID }),
                   error == nil else {return}
             
             DispatchQueue.main.async {
                 self?.conversations = userIds
+                self?.unreadMessages = userIds
             }
         }
     }

@@ -37,7 +37,7 @@ struct PostFeed: View {
                         Image("del")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 100, height: 100, alignment: .center)
+                            .frame(width: 80, height: 80, alignment: .center)
                             .shadow(radius: 12)
                     }
                 })
