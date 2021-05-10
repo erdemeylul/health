@@ -29,7 +29,12 @@ class MessageViewModel: ObservableObject{
     @Published var conversations: [String] = []
     @Published var users = [User]()
     
-    @Published var unreadMessages: [String] = []
+    @Published var unreadMessage = [Mess]()
+    
+    @Published var final = [Mess]()
+    
+    @Published var unreadMessages: Int = 0
+    @Published var count: [Int] = []
     
     var cancellable: AnyCancellable? = nil
     @Published var keyboardIsShowing: Bool = false
@@ -37,6 +42,7 @@ class MessageViewModel: ObservableObject{
     init(){
         fetchUsers()
         setupPublishers()
+        getUnreadMessages()
     }
     
 
@@ -52,15 +58,24 @@ class MessageViewModel: ObservableObject{
 
         let newMessageId = UUID().uuidString
         let dateString = ISO8601DateFormatter().string(from: Date())
-        let data = [
+        let dataSender = [
             "text": text,
             "sender": user.username,
-            "created": dateString
+            "created": dateString,
+            "read": true
         ] as [String : Any]
         
-        Firestore.firestore().collection("users").document(uid).collection("chats").document(otherUsername).collection("messages").document(newMessageId).setData(data)
+        let dataReceiver = [
+            "text": text,
+            "sender": user.username,
+            "created": dateString,
+            "read": false
+        ] as [String : Any]
         
-        Firestore.firestore().collection("users").document(otherUsername).collection("chats").document(uid).collection("messages").document(newMessageId).setData(data)
+        Firestore.firestore().collection("users").document(uid).collection("chats").document(otherUsername).collection("messages").document(newMessageId).setData(dataSender)
+        
+        Firestore.firestore().collection("users").document(otherUsername).collection("chats").document(uid).collection("messages").document(newMessageId).setData(dataReceiver)
+        
     }
     
     func createConversation(){
@@ -73,6 +88,77 @@ class MessageViewModel: ObservableObject{
         Firestore.firestore().collection("users").document(otherUsername).collection("chats").document(uid).setData(["created": dateString])
     }
     
+    func readMessage(name: String){
+        guard let uid = AuthViewModel.shared.userSession?.uid else {return}
+        //let newMessageId = UUID().uuidString
+
+
+        Firestore.firestore().collection("users").document(uid).collection("chats").document(name).collection("messages").getDocuments { (snapshot, _) in
+            guard let documents = snapshot?.documents.compactMap({ $0.documentID }) else {return}
+            
+            
+            for document in documents{
+                Firestore.firestore().collection("users").document(uid).collection("chats").document(name).collection("messages").document(document).updateData(["read": true])
+            }
+        }
+        getUnreadMessages()
+    }
+//
+//    func getUnreadMessages(name: String) -> Int{
+//        guard let uid = AuthViewModel.shared.userSession?.uid else {return 0}
+//
+//        Firestore.firestore().collection("users").document(name).collection("chats").document(uid).collection("messages").whereField("read", isEqualTo: false).getDocuments { (snapshot, _) in
+//            guard let documents = snapshot?.documents.compactMap({ $0.documentID }) else {return}
+//
+//            self.unreadMessage = documents.compactMap ({try? $0.data(as: Message.self)})
+//
+//        }
+//        return unreadMessages
+//    }
+    
+    func getUnreadMessages(){
+        guard let uid = AuthViewModel.shared.userSession?.uid else {return }
+        //guard let user = AuthViewModel.shared.currentUser else {return}
+
+        self.unreadMessage = []
+        Firestore.firestore().collection("users").document(uid).collection("chats").getDocuments { (snapshot, _) in
+            guard let documents = snapshot?.documents.compactMap({ $0.documentID }) else {return}
+            
+            print("DEBUG 1 \(documents)")
+            
+            for doc in documents{
+                Firestore.firestore().collection("users").document(uid).collection("chats").document(doc).collection("messages").whereField("read", isEqualTo: false).getDocuments { (snapshot, _) in
+                    guard let docs = snapshot?.documents else {return}
+                    
+                    print("DEBUG 2 \(docs)")
+                    
+                    self.final = docs.compactMap ({try? $0.data(as: Mess.self)})
+                    
+                    print("DEBUG 3 \(self.final)")
+                    
+                    for fin in self.final{
+                        self.unreadMessage.append(fin)
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchUsers(){
+        Firestore.firestore().collection("users").getDocuments { snapshot, _ in
+            guard let documents = snapshot?.documents else {return}
+            
+            //print("DEBUG 0 \(documents)")
+            
+            self.users = documents.compactMap ({try? $0.data(as: User.self)})
+            
+            //print("DEBUG 0\(self.users)")
+        }
+    }
+    
+
+
+    
     func getConversations(){
         //guard let user = AuthViewModel.shared.currentUser else {return}
         guard let uid = AuthViewModel.shared.userSession?.uid else {return}
@@ -83,7 +169,6 @@ class MessageViewModel: ObservableObject{
             
             DispatchQueue.main.async {
                 self?.conversations = userIds
-                self?.unreadMessages = userIds
             }
         }
     }
@@ -103,7 +188,8 @@ class MessageViewModel: ObservableObject{
                 }
                 return Message(text: $0["text"] as?  String ?? "",
                                type: $0["sender"] as? String == user.username ? .sent : .received,
-                               created: date)
+                               created: date,
+                               read: false)
             }).sorted(by: {first, second in
                 return first.created < second.created
             })
@@ -129,13 +215,6 @@ class MessageViewModel: ObservableObject{
         }
     }
     
-    func fetchUsers(){
-        Firestore.firestore().collection("users").getDocuments { snapshot, _ in
-            guard let documents = snapshot?.documents else {return}
-            
-            self.users = documents.compactMap ({try? $0.data(as: User.self)})
-        }
-    }
     
     private let keyboardWillShow = NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification).map({ _ in true })
 

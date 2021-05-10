@@ -17,9 +17,7 @@ struct ConversationListView: View {
     
     @State var otherImage = ""
     @State var otherName = ""
-    
-
-
+        
     @ObservedObject var model = MessageViewModel()
     
     var body: some View {
@@ -27,17 +25,12 @@ struct ConversationListView: View {
             ScrollView(.vertical){
                 ForEach(model.conversations, id:\.self){ name in
                     NavigationLink(destination: ChatView(otherUsername: name)){
+                        
                         VStack {
                             HStack(spacing: 10){
                                 ForEach(model.users){ user in
                                     if name == user.id {
 
-//                                        KFImage(URL(string: user.profileImageUrl))
-//                                            .resizable()
-//                                            .scaledToFill()
-//                                            .frame(width: 45, height: 45)
-//                                            .clipShape(Circle())
-//                                            .padding()
                                         URLImage(url: URL(string: user.profileImageUrl)!) {image in
                                             image
                                                 .resizable()
@@ -49,43 +42,72 @@ struct ConversationListView: View {
                                             .bold()
                                             .foregroundColor(.black)
                                             .font(.system(size: 32))
-//                                        if model.unreadMessages.contains(name){
-//                                            Circle()
-//                                                .fill(Color.red)
-//                                        }else{
-//                                            Circle()
-//                                                .fill(Color.green)
-//                                        }
-//                                        Spacer()
-//                                        Image(systemName: "chevron.right")
+                                        
+                                        
+                                        Spacer()
+                                          
+                                        ZStack{
+                                            ForEach(model.unreadMessage, id:\.self){ message in
+                                                if user.username == message.sender{
+                                                    ZStack{
+                                                        Circle()
+                                                            .foregroundColor(Color.red)
+                                                            .frame(width: 30, height: 30)
+                                                        Text("!")
+                                                            .foregroundColor(.white)
+                                                            .fontWeight(.bold)
+                                                            .font(.title3)
+                                                            .padding()
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
                                     }
                                 }
+                              
                                 Spacer()
                             }.onAppear{
                                 model.otherUsername = name
-                                print("DEBUG \(model.unreadMessages)\(name)")
+                                
                             }
-//                            .simultaneousGesture(TapGesture().onEnded{
-//                                model.unreadMessages.removeAll{$0 == name}
-//                            })
-
                             Divider()
 
-                            .padding(5)
-                        }
-                    }
+                        } //endofVStack
+
+                    }//ennavlink
+                    .simultaneousGesture(TapGesture().onEnded{
+                        model.readMessage(name: name)
+                        print("DEBUG hehe \(model.unreadMessage.count)")
+                    })
                 }
                 if !otherUsername.isEmpty{
                     NavigationLink("", destination: ChatView(otherUsername: otherUsername), isActive: $showChat)
                 }
-            }.navigationTitle("Conversations")
+            }
 
         }.onAppear{
             model.getConversations()
         }
     }
+    
 
     
+//
+//    func final(name: String, completion: @escaping (Int) -> Void) {
+//        guard let uid = AuthViewModel.shared.userSession?.uid else {return}
+//
+//        Firestore.firestore().collection("users").document(uid).collection("chats").document(name).collection("messages").whereField("read", isEqualTo: false).getDocuments { (snapshot, _) in
+//            guard let documents = snapshot?.documents.compactMap({ $0.documentID }) else {return}
+//
+//            let count = documents.count
+//            completion(count)
+//        }
+//    }
+    
+    
+    
+
 }
 
 

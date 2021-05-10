@@ -8,14 +8,25 @@
 import Foundation
 
 
-enum MessageType: String{
+enum MessageType: String, Decodable{
     case sent
     case received
 }
 
-struct Message: Hashable {
+struct Message: Hashable, Decodable {
     var id: String?
     let text: String
     let type: MessageType
     let created: Date
+    let read: Bool
 }
+
+struct Mess:  Identifiable, Hashable, Decodable{
+    var id: String?
+    let text: String
+    let sender: String
+    let created: String
+    let read: Bool
+}
+
+
