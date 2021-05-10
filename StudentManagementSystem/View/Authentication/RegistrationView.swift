@@ -12,6 +12,7 @@ struct RegistrationView: View {
     @State private var username = ""
     @State private var role = ""
     @State private var password = ""
+    @State private var city = ""
     @State var sourceType: UIImagePickerController.SourceType = UIImagePickerController.SourceType.photoLibrary
 
     @State private var selectedImage: UIImage?
@@ -71,7 +72,14 @@ struct RegistrationView: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         
-                    
+                    CustomTextField(text: $city, placeholder: Text("City"), imageName: "building.2.crop.circle.fill")
+                        .padding()
+                        .background(Color(.init(white: 1, alpha: 0.15)))
+                        .cornerRadius(10)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 32)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
             
 
                     CustomSecureField(text: $password, placeholder: Text("Password"))
@@ -98,13 +106,10 @@ struct RegistrationView: View {
                     }.padding(.bottom, 20)
  
                 }
-                
-                if email != "" && password != "" && username != "" && role != "" && image != nil {
-                    
-                }
+
                 
                 Button(action: {
-                    viewModel.resgister(withEmail: email, password: password, image: selectedImage, username: username, role: role)
+                    viewModel.resgister(withEmail: email, password: password, image: selectedImage, username: username, role: role, city: city)
                 }, label: {
                     Text("Sign Up")
                         .font(.headline)
@@ -113,7 +118,7 @@ struct RegistrationView: View {
                         .background(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
                         .clipShape(Capsule())
                         .padding()
-                }).disabled(email != "" && password != "" && username != "" && role != "" && image != nil ? false : true)
+                }).disabled(email != "" && password != "" && username != "" && role != "" && city != "" && image != nil ? false : true)
                 
                 
 

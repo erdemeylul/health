@@ -26,7 +26,7 @@ struct UserCell: View {
                 Text(user.username)
                     .font(.system(size: 14, weight: .semibold))
                 
-                Text(user.role)
+                Text(user.city)
                     .font(.system(size: 14))
             }
             

@@ -7,6 +7,8 @@ struct User: Identifiable, Decodable{
     let profileImageUrl: String
     let role: String
     let username: String
+    let city: String
+    
     @DocumentID var id: String?
     
     var bio: String?

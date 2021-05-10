@@ -33,7 +33,7 @@ class AuthViewModel: ObservableObject{
         }
     }
     
-    func resgister(withEmail email: String, password: String, image: UIImage?, username: String, role: String){
+    func resgister(withEmail email: String, password: String, image: UIImage?, username: String, role: String, city: String){
         guard let image = image else {return}
         imageUploader.uploadImage(image: image, type: .profile) { imageUrl in
             Auth.auth().createUser(withEmail: email, password: password) { result, error in
@@ -49,6 +49,7 @@ class AuthViewModel: ObservableObject{
                     "role": role,
                     "username": username,
                     "profileImageUrl": imageUrl,
+                    "city": city,
                     "uid": user.uid,
                 ]
                 
