@@ -23,6 +23,12 @@ struct ConversationListView: View {
     var body: some View {
         NavigationView{
             ScrollView(.vertical){
+                Text("Inbox")
+                    .fontWeight(.bold)
+                    .foregroundColor(.green)
+                    .font(.system(size: 50))
+                    .padding(.top, -80)
+
                 ForEach(model.conversations, id:\.self){ name in
                     NavigationLink(destination: ChatView(otherUsername: name)){
                         
@@ -82,7 +88,7 @@ struct ConversationListView: View {
                         model.readMessage(name: name)
                         print("DEBUG hehe \(model.unreadMessage.count)")
                     })
-                }
+                }.padding(.top, -30)
                 if !otherUsername.isEmpty{
                     NavigationLink("", destination: ChatView(otherUsername: otherUsername), isActive: $showChat)
                 }
