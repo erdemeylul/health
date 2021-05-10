@@ -12,8 +12,6 @@ struct RegistrationView: View {
     @State private var username = ""
     @State private var role = ""
     @State private var password = ""
-    @State private var no = ""
-    @State private var schoolName = ""
     @State var sourceType: UIImagePickerController.SourceType = UIImagePickerController.SourceType.photoLibrary
 
     @State private var selectedImage: UIImage?
@@ -21,6 +19,8 @@ struct RegistrationView: View {
     @State var imagePickerPresented = false
     @Environment(\.presentationMode) var mode
     @EnvironmentObject var viewModel: AuthViewModel
+    
+    @State var makeAble = false
     
     
     var body: some View {
@@ -83,13 +83,24 @@ struct RegistrationView: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                     
-                    Section(header: Text("Choose your status")) {
+                    Section(header:
+                                Text("Choose your status")
+                                .foregroundColor(Color.orange)
+                                .fontWeight(.bold)
+                    ) {
                         Picker("Status", selection: $role) {
-                            Text("seller").tag("seller")
-                            Text("buyer").tag("buyer")
+                            Text("seller")
+                                .tag("seller")
+                            Text("buyer")
+                                .tag("buyer")
                         }.pickerStyle(SegmentedPickerStyle())
+                        .accentColor(.orange)
                     }.padding(.bottom, 20)
  
+                }
+                
+                if email != "" && password != "" && username != "" && role != "" && image != nil {
+                    
                 }
                 
                 Button(action: {
@@ -102,7 +113,10 @@ struct RegistrationView: View {
                         .background(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
                         .clipShape(Capsule())
                         .padding()
-                })
+                }).disabled(email != "" && password != "" && username != "" && role != "" && image != nil ? false : true)
+                
+                
+
                 
                 Spacer()
                 

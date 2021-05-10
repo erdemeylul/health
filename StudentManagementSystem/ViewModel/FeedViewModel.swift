@@ -13,7 +13,7 @@ class FeedViewModel: ObservableObject{
     
     init(){
         //fetchPosts()
-        fetchFollowers()
+        //fetchFollowers()
         //fetchFollowingPosts()
     }
     
@@ -39,6 +39,7 @@ class FeedViewModel: ObservableObject{
                 }
             }
         }
+        //print("DEBUG fetch followers")
     }
     
 //    func fetchFollowingPosts(){

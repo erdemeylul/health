@@ -25,7 +25,7 @@ struct ContentView: View {
                         MainTabView(user: user, selectedIndex: $selectedIndex)
                     }
                 }else{
-                    Text("Loading")
+                    ProgressView()
                         .onAppear{
                             viewModel.fetchUser()
                         }

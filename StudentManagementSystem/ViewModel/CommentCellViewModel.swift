@@ -24,7 +24,6 @@ class CommentCellViewModel: ObservableObject{
 
         Firestore.firestore().collection("users").document(comment.uid).getDocument { snapshot, _ in
             self.comment.user = try? snapshot?.data(as: User.self)
-            print(self.comment.user ?? "")
         }
     }
 }

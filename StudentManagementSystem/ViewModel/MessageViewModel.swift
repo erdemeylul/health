@@ -124,17 +124,14 @@ class MessageViewModel: ObservableObject{
         Firestore.firestore().collection("users").document(uid).collection("chats").getDocuments { (snapshot, _) in
             guard let documents = snapshot?.documents.compactMap({ $0.documentID }) else {return}
             
-            print("DEBUG 1 \(documents)")
             
             for doc in documents{
                 Firestore.firestore().collection("users").document(uid).collection("chats").document(doc).collection("messages").whereField("read", isEqualTo: false).getDocuments { (snapshot, _) in
                     guard let docs = snapshot?.documents else {return}
                     
-                    print("DEBUG 2 \(docs)")
                     
                     self.final = docs.compactMap ({try? $0.data(as: Mess.self)})
                     
-                    print("DEBUG 3 \(self.final)")
                     
                     for fin in self.final{
                         self.unreadMessage.append(fin)

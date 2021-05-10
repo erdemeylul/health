@@ -80,7 +80,6 @@ class ProfileViewModel: ObservableObject{
                 Firestore.firestore().collection("posts").whereField("ownerUid", isEqualTo: uid).getDocuments {snapshot, _ in
                     guard let posts = snapshot?.documents.count else {return}
                     self.user.stats = UserStats(following: following, posts: posts, followers: followers)
-                    print("fetched")
                 }
             }
         }
@@ -120,7 +119,6 @@ class ProfileViewModel: ObservableObject{
         Firestore.firestore().collection("users").document(uid).getDocument { snapshot, _ in
             self.man = try? snapshot?.data(as: User.self)
             self.bio = self.man?.bio ?? ""
-            print(self.bio)
         }
     }
 
@@ -141,18 +139,20 @@ class ProfileViewModel: ObservableObject{
         Firestore.firestore().collection("users").document(uid).collection("ratings").getDocuments { (snapshot, _) in
             guard let documents = snapshot?.documents else {return}
             self.ratings = documents.compactMap({try? $0.data(as: RatingDoc.self)})
-            print(self.ratings)
             for rating in self.ratings{
-                self.ratingOwners.append(rating.owner)
-                self.ratingMean.append(rating.rating)
+                if !self.ratingOwners.contains(rating.owner){
+                    self.ratingOwners.append(rating.owner)
+                    self.ratingMean.append(rating.rating)
+                }
+                print("DEBUG 1 \(self.ratingOwners)")
+                
+                print("DEBUG 2 \(self.ratingMean)")
+
                 if self.ratingMean.count > 0 {
                     self.total = self.ratingMean.reduce(0, +)
+                    print("DEBUG 3 \(self.total)")
                 }
             }
-            print(self.ratingOwners)
-            print(self.ratingMean)
-            print(self.total)
-            print(self.ratingMean.count)
         }
     }
     

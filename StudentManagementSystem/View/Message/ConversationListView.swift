@@ -27,37 +27,39 @@ struct ConversationListView: View {
                     NavigationLink(destination: ChatView(otherUsername: name)){
                         
                         VStack {
-                            HStack(spacing: 10){
+                            HStack(){
                                 ForEach(model.users){ user in
                                     if name == user.id {
 
-                                        URLImage(url: URL(string: user.profileImageUrl)!) {image in
-                                            image
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 45, height: 45)
-                                                .clipShape(Circle())
-                                                .padding()}
-                                        Text(user.username)
-                                            .bold()
-                                            .foregroundColor(.black)
-                                            .font(.system(size: 32))
-                                        
-                                        
-                                        Spacer()
-                                          
-                                        ZStack{
-                                            ForEach(model.unreadMessage, id:\.self){ message in
-                                                if user.username == message.sender{
-                                                    ZStack{
-                                                        Circle()
-                                                            .foregroundColor(Color.red)
-                                                            .frame(width: 30, height: 30)
-                                                        Text("!")
-                                                            .foregroundColor(.white)
-                                                            .fontWeight(.bold)
-                                                            .font(.title3)
-                                                            .padding()
+                                        HStack{
+                                            URLImage(url: URL(string: user.profileImageUrl)!) {image in
+                                                image
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 45, height: 45)
+                                                    .clipShape(Circle())
+                                                    .padding()}
+                                            Text(user.username)
+                                                .bold()
+                                                .foregroundColor(.black)
+                                                .font(.system(size: 32))
+                                            
+                                            
+                                            Spacer()
+                                              
+                                            ZStack{
+                                                ForEach(model.unreadMessage, id:\.self){ message in
+                                                    if user.username == message.sender{
+                                                        ZStack{
+                                                            Circle()
+                                                                .foregroundColor(Color.red)
+                                                                .frame(width: 30, height: 30)
+                                                            Text("!")
+                                                                .foregroundColor(.white)
+                                                                .fontWeight(.bold)
+                                                                .font(.title3)
+                                                                .padding()
+                                                        }
                                                     }
                                                 }
                                             }

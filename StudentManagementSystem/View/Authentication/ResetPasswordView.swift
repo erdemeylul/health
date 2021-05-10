@@ -22,7 +22,7 @@ struct ResetPasswordView: View {
                 .ignoresSafeArea()
             
             VStack {
-                Image("instagram_logo_white")
+                Image("bg")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 220, height: 100)

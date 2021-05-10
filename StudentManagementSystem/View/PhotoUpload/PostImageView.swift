@@ -18,6 +18,8 @@ struct PostImageView: View {
     
     // Alert
     @State var showAlert: Bool = false
+    @State var showProgress: Bool = false
+
     @State var postUploadedSuccessfully: Bool = false
     
     var body: some View {
@@ -59,7 +61,7 @@ struct PostImageView: View {
                     .autocapitalization(.sentences)
                 
                 Button(action: {
-                    //postPicture()
+                    showProgress = true
                     if let image = selectedImage{
                         viewModel.uploadPost(caption: captionText, image: image){_ in
                             captionText = ""
@@ -67,6 +69,7 @@ struct PostImageView: View {
                             tabIndex = 0
                             postUploadedSuccessfully = true
                             showAlert.toggle()
+                            showProgress = false
                         }
                     }
                 }, label: {
@@ -79,8 +82,11 @@ struct PostImageView: View {
                         .background(colorScheme == . light ? Color.purple : Color.orange)
                         .cornerRadius(12)
                         .padding(.horizontal)
-                })
+                }).disabled(showProgress ? true : false)
                 .accentColor(colorScheme == .light ? Color.orange : Color.purple)
+                if showProgress{
+                    ProgressView()
+                }
                 
             })
             .alert(isPresented: $showAlert) { () -> Alert in

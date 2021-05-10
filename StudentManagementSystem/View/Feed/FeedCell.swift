@@ -33,9 +33,6 @@ struct FeedCell: View {
                                 .clipped()
                                 .cornerRadius(18)}
                         
-
-                        
-                       
                         Text(viewModel.post.ownerUsername)
                             .font(.system(size: 14, weight: .semibold))
                     }
@@ -45,7 +42,7 @@ struct FeedCell: View {
             .padding(.leading, 8)
             .padding(.trailing, 12)
             
-            VStack{
+            VStack(){
                 URLImage(url: URL(string: viewModel.post.imageUrl)!) {image in
                     image
                         .resizable()
@@ -54,7 +51,7 @@ struct FeedCell: View {
                         .frame(maxHeight: 440)
                         .clipped()
                 }
-            }.frame(minHeight: 440)
+            }.frame(minWidth:UIScreen.main.bounds.width ,minHeight: 440)
             
             // action buttons
             HStack(spacing: 16) {

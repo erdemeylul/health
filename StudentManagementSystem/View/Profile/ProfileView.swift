@@ -43,7 +43,7 @@ struct ProfileView: View {
                         }.padding(.trailing, 32)
                     }
                     
-                    VStack{
+                    VStack(alignment: .leading){
                         Text(viewModel.user.username)
                             .font(.system(size: 15, weight: .semibold))
                             .padding([.leading, .top])
@@ -146,14 +146,14 @@ struct ProfileView: View {
                                                 viewModel.getRating()
 
                                             } label: {
-                                                Text("publish")
-                                                    .background(Color.pink)
-                                                    .frame(width: 100, height: 20)
-                                                    .cornerRadius(12)
-                                            }
+                                                HStack {
+                                                        Image(systemName: "star.square.fill")
+                                                        Text("Publish")
+                                                }
+                                            }.buttonStyle(GradientButtonStyle())
                                             
                                         }
-                                    }
+                                    }.padding(.top, 5)
                                 }
                             }
                         }
