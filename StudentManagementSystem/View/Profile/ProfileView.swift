@@ -15,6 +15,13 @@ struct ProfileView: View {
     @State var otherUsername = ""
     @State var show = false
     
+    @State private var selectedImage: UIImage?
+    @State private var image: Image?
+    
+    @State var imagePickerPresented = false
+    @State var sourceType: UIImagePickerController.SourceType = UIImagePickerController.SourceType.photoLibrary
+    
+    
     init(user: User) {
         self.user = user
         self.viewModel = ProfileViewModel(user: user)
@@ -25,21 +32,51 @@ struct ProfileView: View {
             VStack(spacing: 32) {
                 VStack(alignment: .leading) {
                     HStack {
-                        URLImage(url: URL(string: viewModel.user.profileImageUrl)!) {image in
+
+                        if let image = image{
                             image
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 80, height: 80)
                                 .clipShape(Circle())
-                                .padding(.leading)}
+                                .padding(.leading)
+                                .onTapGesture {
+                                    if AuthViewModel.shared.currentUser?.id == user.id {
+                                        imagePickerPresented = true
+                                    }
+                                }.sheet(isPresented: $imagePickerPresented, onDismiss:loadImage, content: {
+                                    ImagePicker(image: $selectedImage, sourceType: $sourceType)
+                                })
+                         
+                        }else {
+                            URLImage(url: URL(string: viewModel.user.profileImageUrl)!) {image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 80, height: 80)
+                                    .clipShape(Circle())
+                                    .padding(.leading)
+                            }.onTapGesture {
+                                if AuthViewModel.shared.currentUser?.id == user.id {
+                                    imagePickerPresented = true
+                                }
+                            }.sheet(isPresented: $imagePickerPresented, onDismiss:loadImage, content: {
+                                ImagePicker(image: $selectedImage, sourceType: $sourceType)
+                            })
+                        }
                         
                         Spacer()
                         
                         HStack(spacing: 16) {
                             UserStatView(value: viewModel.posts, title: "Posts")
-                            UserStatView(value: viewModel.followers, title: "Followers")
-                            UserStatView(value: viewModel.following, title: "Following")
-
+                            
+                            NavigationLink(destination: FollowersView(user: viewModel.user)) {
+                                UserStatView(value: viewModel.followers, title: "Followers").foregroundColor(Color.primary)
+                            }
+                            
+                            NavigationLink(destination: FollowingView(user: viewModel.user)) {
+                                UserStatView(value: viewModel.following, title: "Following").foregroundColor(Color.primary)
+                            }
                         }.padding(.trailing, 32)
                     }
                     
@@ -176,7 +213,13 @@ struct ProfileView: View {
     }
 }
 
-
+extension ProfileView {
+    func loadImage() {
+        guard let selectedImage = selectedImage else { return }
+        image = Image(uiImage: selectedImage)
+        viewModel.changePic(image: selectedImage)
+    }
+}
 extension Double {
     /// Rounds the double to decimal places value
     func rounded(toPlaces places:Int) -> Double {

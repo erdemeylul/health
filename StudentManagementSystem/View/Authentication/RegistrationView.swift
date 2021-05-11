@@ -104,7 +104,6 @@ struct RegistrationView: View {
                         }.pickerStyle(SegmentedPickerStyle())
                         .accentColor(.orange)
                     }.padding(.bottom, 20)
- 
                 }
 
                 

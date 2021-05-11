@@ -24,8 +24,8 @@ struct FeedCell: View {
             // user info
             HStack {
                 if let user = viewModel.post.user{
-                    NavigationLink(destination: ProfileView(user: user)) {
-                        URLImage(url: URL(string: viewModel.post.ownerImageUrl)!) {image in
+                    if AuthViewModel.shared.currentUser?.id == user.id {
+                        URLImage(url: URL(string: user.profileImageUrl)!) {image in
                             image
                                 .resizable()
                                 .scaledToFill()
@@ -35,6 +35,19 @@ struct FeedCell: View {
                         
                         Text(viewModel.post.ownerUsername)
                             .font(.system(size: 14, weight: .semibold))
+                    }else{
+                        NavigationLink(destination: ProfileView(user: user)) {
+                            URLImage(url: URL(string: user.profileImageUrl)!) {image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 45, height: 45)
+                                    .clipped()
+                                    .cornerRadius(18)}
+                            
+                            Text(viewModel.post.ownerUsername)
+                                .font(.system(size: 14, weight: .semibold))
+                        }
                     }
                 }
             }.frame(minHeight: 45)

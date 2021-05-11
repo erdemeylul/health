@@ -25,6 +25,8 @@
 		CA373A8D2632D6CC00A6AC00 /* PostGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA373A882632D6CC00A6AC00 /* PostGridView.swift */; };
 		CA373A8E2632D6CC00A6AC00 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA373A892632D6CC00A6AC00 /* UserCell.swift */; };
 		CA373A8F2632D6CC00A6AC00 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA373A8A2632D6CC00A6AC00 /* UserListView.swift */; };
+		CA5467EF264AE82100ECEB8A /* FollowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5467EE264AE82100ECEB8A /* FollowersView.swift */; };
+		CA5467F7264AF45E00ECEB8A /* FollowingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5467F6264AF45E00ECEB8A /* FollowingView.swift */; };
 		CA55A54926398C7D0045511B /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = CA55A54826398C7D0045511B /* URLImage */; };
 		CA63B3AE2631BE070002987C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA63B3AD2631BE070002987C /* GoogleService-Info.plist */; };
 		CA63B3B42631CABF0002987C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA63B3B02631CABF0002987C /* ProfileView.swift */; };
@@ -99,6 +101,8 @@
 		CA373A882632D6CC00A6AC00 /* PostGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostGridView.swift; sourceTree = "<group>"; };
 		CA373A892632D6CC00A6AC00 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		CA373A8A2632D6CC00A6AC00 /* UserListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
+		CA5467EE264AE82100ECEB8A /* FollowersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersView.swift; sourceTree = "<group>"; };
+		CA5467F6264AF45E00ECEB8A /* FollowingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingView.swift; sourceTree = "<group>"; };
 		CA63B3AD2631BE070002987C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CA63B3B02631CABF0002987C /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CA63B3B92631D0E50002987C /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -181,6 +185,15 @@
 				CA1C7C12262C312A004D96C3 /* MainTabView.swift */,
 			);
 			path = ADMIN;
+			sourceTree = "<group>";
+		};
+		CA5467ED264AE7FB00ECEB8A /* ProfileNav */ = {
+			isa = PBXGroup;
+			children = (
+				CA5467EE264AE82100ECEB8A /* FollowersView.swift */,
+				CA5467F6264AF45E00ECEB8A /* FollowingView.swift */,
+			);
+			path = ProfileNav;
 			sourceTree = "<group>";
 		};
 		CA94CA8A2633FB11005F6CF8 /* Comment */ = {
@@ -303,6 +316,7 @@
 		CAFBDBE9262B1CDA0015E04D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CA5467ED264AE7FB00ECEB8A /* ProfileNav */,
 				CA019A3726498A2000AB0FCC /* AnimatedWave */,
 				CAC7523226427F8300601779 /* PhotoUpload */,
 				CAFBC16C263A9B290062D898 /* User */,
@@ -501,6 +515,7 @@
 			files = (
 				CA94CA882633FB03005F6CF8 /* CommentViewModel.swift in Sources */,
 				CAFBC182263AA6E30062D898 /* SearchView.swift in Sources */,
+				CA5467EF264AE82100ECEB8A /* FollowersView.swift in Sources */,
 				CA9B3E5A2635A357009D0A1E /* PostFeed.swift in Sources */,
 				CAC752372642808700601779 /* PostImageView.swift in Sources */,
 				CA373A752632AF6200A6AC00 /* FeedViewModel.swift in Sources */,
@@ -552,6 +567,7 @@
 				CA63B3BA2631D0E50002987C /* ProfileViewModel.swift in Sources */,
 				CA94CA9526341130005F6CF8 /* NotificationsViewModel.swift in Sources */,
 				CA373A812632D5E600A6AC00 /* SearchViewModel.swift in Sources */,
+				CA5467F7264AF45E00ECEB8A /* FollowingView.swift in Sources */,
 				CAFBDBF4262B1D000015E04D /* TextArea.swift in Sources */,
 				CA22E308263E8C7E000033D5 /* CommentCellViewModel.swift in Sources */,
 				CA22E30B263EC8A9000033D5 /* RatingDoc.swift in Sources */,

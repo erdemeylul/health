@@ -48,7 +48,7 @@ struct PostFeed: View {
             HStack {
 
                 if let user = viewModel.post.user{
-                    NavigationLink(destination: ProfileView(user: user)){
+                    if AuthViewModel.shared.currentUser?.id == user.id {
                         URLImage(url: URL(string: viewModel.post.ownerImageUrl)!) {image in
                             image
                                 .resizable()
@@ -61,7 +61,24 @@ struct PostFeed: View {
                         Text(viewModel.post.ownerUsername)
                             .foregroundColor(.primary)
                             .font(.system(size: 14, weight: .semibold))
+                    }else{
+                        NavigationLink(destination: ProfileView(user: user)){
+                            URLImage(url: URL(string: viewModel.post.ownerImageUrl)!) {image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 36, height: 36)
+                                    .clipped()
+                                    .cornerRadius(18)}
+                            
+                           
+                            Text(viewModel.post.ownerUsername)
+                                .foregroundColor(.primary)
+                                .font(.system(size: 14, weight: .semibold))
+                        }
                     }
+
+                    
                 }
                  
                 Spacer()

@@ -33,7 +33,7 @@ struct ConversationListView: View {
                     NavigationLink(destination: ChatView(otherUsername: name)){
                         
                         VStack {
-                            HStack(){
+                            HStack{
                                 ForEach(model.users){ user in
                                     if name == user.id {
 
@@ -71,24 +71,27 @@ struct ConversationListView: View {
                                             }
                                         }
                                         
+                                        
                                     }
                                 }
-                              
-                                Spacer()
+                                                                                              
                             }.onAppear{
                                 model.otherUsername = name
                                 
                             }
-                            Divider()
+                            Rectangle()
+                                .frame(width: UIScreen.main.bounds.width - 20, height: 3, alignment: .center).padding(.top, -15)
 
                         } //endofVStack
 
-                    }//ennavlink
+                    }
+                    //ennavlink
                     .simultaneousGesture(TapGesture().onEnded{
                         model.readMessage(name: name)
                         print("DEBUG hehe \(model.unreadMessage.count)")
                     })
-                }.padding(.top, -30)
+                }
+                .padding(.top, -30)
                 if !otherUsername.isEmpty{
                     NavigationLink("", destination: ChatView(otherUsername: otherUsername), isActive: $showChat)
                 }
@@ -98,24 +101,6 @@ struct ConversationListView: View {
             model.getConversations()
         }
     }
-    
-
-    
-//
-//    func final(name: String, completion: @escaping (Int) -> Void) {
-//        guard let uid = AuthViewModel.shared.userSession?.uid else {return}
-//
-//        Firestore.firestore().collection("users").document(uid).collection("chats").document(name).collection("messages").whereField("read", isEqualTo: false).getDocuments { (snapshot, _) in
-//            guard let documents = snapshot?.documents.compactMap({ $0.documentID }) else {return}
-//
-//            let count = documents.count
-//            completion(count)
-//        }
-//    }
-    
-    
-    
-
 }
 
 

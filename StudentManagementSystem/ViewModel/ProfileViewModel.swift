@@ -114,6 +114,16 @@ class ProfileViewModel: ObservableObject{
         }
     }
     
+    func changePic(image: UIImage?){
+        guard let image = image else {return}
+
+        guard let uid = AuthViewModel.shared.currentUser?.id else {return}
+        
+        imageUploader.uploadImage(image: image, type: .profile) { imageUrl in
+            Firestore.firestore().collection("users").document(uid).updateData(["profileImageUrl": imageUrl])
+        }
+    }
+    
     func fetchBio(){
         guard let uid = user.id else {return}
         Firestore.firestore().collection("users").document(uid).getDocument { snapshot, _ in
@@ -144,13 +154,9 @@ class ProfileViewModel: ObservableObject{
                     self.ratingOwners.append(rating.owner)
                     self.ratingMean.append(rating.rating)
                 }
-                print("DEBUG 1 \(self.ratingOwners)")
                 
-                print("DEBUG 2 \(self.ratingMean)")
-
                 if self.ratingMean.count > 0 {
                     self.total = self.ratingMean.reduce(0, +)
-                    print("DEBUG 3 \(self.total)")
                 }
             }
         }
