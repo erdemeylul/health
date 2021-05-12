@@ -86,6 +86,9 @@ struct LoginView: View {
                 .padding(.top, -44)
             }
         }
+//        .onAppear{
+//            UserDefaults.standard.set(false, forKey: "didLaunchBefore")
+//        }
     }
 }
 

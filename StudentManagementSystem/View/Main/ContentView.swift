@@ -14,7 +14,11 @@ struct ContentView: View {
     var body: some View {
         Group {
             if viewModel.userSession == nil {
-                LoginView()
+                if !UserDefaults.standard.bool(forKey: "didLaunchBefore"){
+                    OnboardingView()
+                }else{
+                    LoginView()
+                }
             }else{
                 if viewModel.currentUser?.role == "seller"{
                     if let user = viewModel.currentUser{

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CA019A3926498A4800AB0FCC /* AnimatedWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA019A3826498A4800AB0FCC /* AnimatedWave.swift */; };
 		CA0EEA12264BB85A00B7926A /* GetUnreadMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0EEA11264BB85A00B7926A /* GetUnreadMessages.swift */; };
+		CA0EEA16264BD36A00B7926A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0EEA15264BD36A00B7926A /* OnboardingView.swift */; };
+		CA0EEA19264BD3CA00B7926A /* OnboardingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0EEA18264BD3CA00B7926A /* OnboardingItem.swift */; };
 		CA1C7C13262C312A004D96C3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1C7C12262C312A004D96C3 /* MainTabView.swift */; };
 		CA1C7C30262C4F9F004D96C3 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1C7C2F262C4F9F004D96C3 /* Student.swift */; };
 		CA22E308263E8C7E000033D5 /* CommentCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22E307263E8C7E000033D5 /* CommentCellViewModel.swift */; };
@@ -86,6 +88,8 @@
 /* Begin PBXFileReference section */
 		CA019A3826498A4800AB0FCC /* AnimatedWave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedWave.swift; sourceTree = "<group>"; };
 		CA0EEA11264BB85A00B7926A /* GetUnreadMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUnreadMessages.swift; sourceTree = "<group>"; };
+		CA0EEA15264BD36A00B7926A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		CA0EEA18264BD3CA00B7926A /* OnboardingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItem.swift; sourceTree = "<group>"; };
 		CA1C7C12262C312A004D96C3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		CA1C7C2F262C4F9F004D96C3 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		CA22E307263E8C7E000033D5 /* CommentCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCellViewModel.swift; sourceTree = "<group>"; };
@@ -179,6 +183,15 @@
 				CA019A3826498A4800AB0FCC /* AnimatedWave.swift */,
 			);
 			path = AnimatedWave;
+			sourceTree = "<group>";
+		};
+		CA0EEA14264BD35700B7926A /* OnboardingView */ = {
+			isa = PBXGroup;
+			children = (
+				CA0EEA15264BD36A00B7926A /* OnboardingView.swift */,
+				CA0EEA18264BD3CA00B7926A /* OnboardingItem.swift */,
+			);
+			path = OnboardingView;
 			sourceTree = "<group>";
 		};
 		CA1C7C11262C3114004D96C3 /* MainTabView */ = {
@@ -318,6 +331,7 @@
 		CAFBDBE9262B1CDA0015E04D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CA0EEA14264BD35700B7926A /* OnboardingView */,
 				CA5467ED264AE7FB00ECEB8A /* ProfileNav */,
 				CA019A3726498A2000AB0FCC /* AnimatedWave */,
 				CAC7523226427F8300601779 /* PhotoUpload */,
@@ -551,6 +565,7 @@
 				CA94CA9E26341B72005F6CF8 /* NotificationCellViewModel.swift in Sources */,
 				CAFBDC14262B21D80015E04D /* UserStatView.swift in Sources */,
 				CA63B3B42631CABF0002987C /* ProfileView.swift in Sources */,
+				CA0EEA19264BD3CA00B7926A /* OnboardingItem.swift in Sources */,
 				CA1C7C13262C312A004D96C3 /* MainTabView.swift in Sources */,
 				CA373A7B2632BA4200A6AC00 /* FeedCellViewModel.swift in Sources */,
 				CAFBC17B263AA31F0062D898 /* ConversationListView.swift in Sources */,
@@ -579,6 +594,7 @@
 				CAC7523426427F9700601779 /* PhotoUploadView.swift in Sources */,
 				CAFBDBAF262B1C190015E04D /* StudentManagementSystemApp.swift in Sources */,
 				CA1C7C30262C4F9F004D96C3 /* Student.swift in Sources */,
+				CA0EEA16264BD36A00B7926A /* OnboardingView.swift in Sources */,
 				CAFBDBF3262B1D000015E04D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

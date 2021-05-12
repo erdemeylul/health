@@ -15,18 +15,19 @@ struct FollowingView: View {
     
     var body: some View {
         ScrollView {
-            LazyVStack {
-                Text("Following List")
-                ForEach(users.shuffled()) { user in
-                    NavigationLink(
-                        destination: LazyView(ProfileView(user: user)),
-                        label: {
-                            UserCell(user: user)
-                                .padding(.leading)
-                        })
-                }.foregroundColor(Color.primary)
-            }
+            Text("Following List")
+            ForEach(users.shuffled(), id:\.id) { user in
+                NavigationLink(
+                    destination: LazyView(ProfileView(user: user)),
+                    label: {
+                        UserCell(user: user)
+                            .padding(.leading)
+                            
+                    })
+            }.foregroundColor(Color.primary)
+            
         }.onAppear{
+            //self.users = []
             fetchFollowing()
         }
     }
@@ -44,11 +45,9 @@ struct FollowingView: View {
                     fol = try? snapshot?.data(as: User.self)
 
                     if fol != nil{
-                        print("DEBBUG 2 \(fol!)")
-
-                        self.users.append(fol!)
-                        print("DEBBUG 3 \(users)")
-
+                        if !self.users.contains(fol!){
+                            self.users.append(fol!)
+                        }
                     }
                 }
             }

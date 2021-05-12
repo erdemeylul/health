@@ -134,7 +134,15 @@ struct RegistrationView: View {
                     }.foregroundColor(.white)
                 })
             }
+        }.navigationBarHidden(true)
+        .onAppear{
+            UISegmentedControl.appearance().selectedSegmentTintColor = .orange
+            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.blue], for: .selected)
+            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
         }
+//        .onAppear{
+//            UserDefaults.standard.set(false, forKey: "didLaunchBefore")
+//        }
     }
 }
 

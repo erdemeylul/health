@@ -2,7 +2,11 @@
 
 import FirebaseFirestoreSwift
 
-struct User: Identifiable, Decodable{
+struct User: Identifiable, Decodable, Equatable{
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.email == rhs.email && lhs.profileImageUrl == rhs.profileImageUrl && lhs.role == rhs.role && lhs.username == rhs.username && lhs.city == rhs.city
+    }
+    
     let email: String
     let profileImageUrl: String
     let role: String
