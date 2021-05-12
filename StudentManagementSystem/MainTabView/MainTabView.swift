@@ -6,6 +6,9 @@ struct MainTabView: View {
     
     let user: User
     @Binding var selectedIndex: Int
+    @StateObject var viewModel = GetUnreadMessages()
+    
+    
     
     var body: some View {
         NavigationView {
@@ -55,11 +58,20 @@ struct MainTabView: View {
             .navigationBarItems(leading: logoutButton, trailing: NavigationLink(
                 destination: ConversationListView(),
                 label: {
-                    Image(systemName: "envelope.circle")
-                        .font(.system(size:33))
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(Color.green)
-                        .frame(width: 60, height:60)
+                    ZStack{
+                        Image(systemName: "envelope.circle")
+                            .font(.system(size:33))
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundColor(Color.green)
+                            .frame(width: 60, height:60)
+                        Circle()
+                            .foregroundColor(Color.red)
+                            .frame(width: 10, height: 10)
+                            .offset(x: 10, y: -10)
+                            .opacity(viewModel.unreadMessage.count > 0 ? 1 : 0)
+                    }.onAppear{
+                        viewModel.getUnreadMessages()
+                    }
                 }))
 
             .accentColor(.black)

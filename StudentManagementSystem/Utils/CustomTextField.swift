@@ -23,6 +23,7 @@ struct CustomTextField: View {
                     .foregroundColor(.white)
                 
                 TextField("", text: $text)
+                    .padding(.leading, 10)
             }
         }
     }
