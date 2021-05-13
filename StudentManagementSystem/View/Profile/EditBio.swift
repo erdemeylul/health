@@ -13,7 +13,8 @@ struct EditBio: View {
             HStack {
                 Button(action: { mode.wrappedValue.dismiss() }, label: {
                     Text("Cancel")
-                })
+                }).buttonStyle(AppButtonStyle2())
+
                 
                 Spacer()
                 
@@ -22,7 +23,8 @@ struct EditBio: View {
                     mode.wrappedValue.dismiss()
                 }, label: {
                     Text("Done").bold()
-                })
+                }).buttonStyle(AppButtonStyle())
+
             }.padding()
             
             TextArea(text: $bioText, placeholder: "Add your bio..")

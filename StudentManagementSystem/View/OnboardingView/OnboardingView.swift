@@ -3,6 +3,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    
   
   var onboardingData: [OnboardingItem] = [
     OnboardingItem(imageName: "1", title: "Dogal urun ureticisiyim", description: "O zaman oncelikle kayit sayfasinda `uretici` bolmesini sec ve uretim yaptigin `sehri` belirt. Peynir, sut, recel, yogurt, kefir, salca, tursu, zeytin, zeytinyagi gibi urunlerin yaninda, ev yemekleri ureticilerinin urunleri de uygulama kapsamina dahildir."),
@@ -35,9 +36,6 @@ struct OnboardingView: View {
           }
           .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
           .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-          
-
-          
         }
     }.onAppear{
         UserDefaults.standard.set(true, forKey: "didLaunchBefore")
@@ -49,6 +47,8 @@ struct OnboardingView: View {
 
 fileprivate struct OnboardingCard: View {
   let onboardingItem: OnboardingItem
+  @State private var isAnimating: Bool = false
+
   
   var body: some View {
     GeometryReader { geometry in
@@ -57,6 +57,8 @@ fileprivate struct OnboardingCard: View {
           .resizable()
           .frame(height: geometry.size.height / 1.7)
           .frame(maxWidth: .infinity)
+          .scaleEffect(isAnimating ? 1 : 0.8)
+
         Text(onboardingItem.title)
           .font(.title)
           .foregroundColor(.primary)
@@ -67,7 +69,12 @@ fileprivate struct OnboardingCard: View {
           .font(.body)
           .foregroundColor(.primary)
           .padding(.horizontal, 15)
-      }
+      }  .onAppear(perform: {
+        isAnimating = false
+        withAnimation(.easeOut(duration: 0.8)) {
+            self.isAnimating = true
+        }
+    })
     }
   }
 }

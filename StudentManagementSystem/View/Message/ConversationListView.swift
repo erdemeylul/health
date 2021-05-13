@@ -23,12 +23,12 @@ struct ConversationListView: View {
     var body: some View {
         NavigationView{
             ScrollView(.vertical){
-                Text("Inbox")
-                    .fontWeight(.bold)
-                    .foregroundColor(.green)
-                    .font(.system(size: 50))
-                    .padding(.top, -80)
 
+                BaseViewContainer {
+                            Text("Inbox")
+                            //Image(systemName: "envelope.fill")
+                }.padding(.top, -70)
+                
                 ForEach(model.conversations, id:\.self){ name in
                     NavigationLink(destination: ChatView(otherUsername: name)){
                         
@@ -70,8 +70,6 @@ struct ConversationListView: View {
                                                 }
                                             }
                                         }
-                                        
-                                        
                                     }
                                 }
                                                                                               
@@ -80,7 +78,8 @@ struct ConversationListView: View {
                                 
                             }
                             Rectangle()
-                                .frame(width: UIScreen.main.bounds.width - 20, height: 3, alignment: .center).padding(.top, -15)
+                                .frame(width: UIScreen.main.bounds.width - 20, height: 1, alignment: .center).padding(.top, -15)
+                                .foregroundColor(Color.green)
 
                         } //endofVStack
 
