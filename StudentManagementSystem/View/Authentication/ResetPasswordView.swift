@@ -1,9 +1,3 @@
-//
-//  ResetPasswordView.swift
-//  InstagramSwiftUITutorial
-//
-//  Created by Stephen Dowless on 12/27/20.
-//
 
 import SwiftUI
 
@@ -26,6 +20,7 @@ struct ResetPasswordView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 220, height: 100)
+                    .clipShape(Circle())
                     .foregroundColor(.white)
                                     
                 VStack(spacing: 20) {
