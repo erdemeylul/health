@@ -11,12 +11,14 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @EnvironmentObject var viewModel: AuthViewModel
+    @State var show =  false
     
     var body: some View {
         NavigationView {
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
+                
                 
                 VStack {
                     Text("Heheh")
@@ -59,10 +61,15 @@ struct LoginView: View {
                                         
                     Button(action: {
                         viewModel.login(withEmail: email, password: password)
+                        if viewModel.userSession == nil{
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                show = true
+                            }
+                        }
                     }, label: {
                         Text("Sign In")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(email != "" && password != "" ? .white : .gray)
                             .frame(width: 360, height: 50)
                             .background(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
                             .clipShape(Capsule())
@@ -84,6 +91,19 @@ struct LoginView: View {
                         }).padding(.bottom, 16)
                 }
                 .padding(.top, -44)
+                .blur(radius: show ? 5 : 0)
+                
+                
+                Text("Fill in all the areas correctly")
+                    .foregroundColor(Color.white)
+                    .padding()
+                    .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
+                    .cornerRadius(15.0)
+                    .opacity(show ? 1 : 0)
+                    .animation(.easeInOut)
+                    .onTapGesture {
+                        show = false
+                    }
             }
         }
 //        .onAppear{

@@ -22,6 +22,21 @@ struct RegistrationView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     
     @State var makeAble = false
+    @State var show = false
+    
+    init() {
+        //this changes the "thumb" that selects between items
+        UISegmentedControl.appearance().selectedSegmentTintColor = .white
+        //and this changes the color for the whole "bar" background
+        UISegmentedControl.appearance().backgroundColor = .purple
+
+        //this will change the font size
+        UISegmentedControl.appearance().setTitleTextAttributes([.font : UIFont.preferredFont(forTextStyle: .largeTitle)], for: .normal)
+
+        //these lines change the text color for various states
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
+    }
     
     
     var body: some View {
@@ -96,23 +111,28 @@ struct RegistrationView: View {
                                 .foregroundColor(Color.orange)
                                 .fontWeight(.bold)
                     ) {
-                        Picker("Status", selection: $role) {
-                            Text("seller")
-                                .tag("seller")
-                            Text("buyer")
-                                .tag("buyer")
+                        Picker(selection: $role, label: Text("")){
+                            Text("seller").tag("seller")
+                            Text("buyer").tag("buyer")
                         }.pickerStyle(SegmentedPickerStyle())
-                        .accentColor(.orange)
-                    }.padding(.bottom, 20)
+                        .padding(.top, -10)
+                    }
+                    .padding(.bottom, 20)
+                    .padding(.horizontal, 20)
                 }
 
                 
                 Button(action: {
                     viewModel.resgister(withEmail: email, password: password, image: selectedImage, username: username, role: role, city: city)
+                    if viewModel.userSession == nil{
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            show = true
+                        }
+                    }
                 }, label: {
                     Text("Sign Up")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(email != "" && password != "" && username != "" && role != "" && city != "" && image != nil ? .white : .gray)
                         .frame(width: 360, height: 50)
                         .background(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
                         .clipShape(Capsule())
@@ -133,13 +153,26 @@ struct RegistrationView: View {
                             .font(.system(size: 14, weight: .semibold))
                     }.foregroundColor(.white)
                 })
-            }
+                
+                
+            }.blur(radius: show ? 5 : 0)
+
+            Text("Fill in all the areas correctly")
+                .foregroundColor(Color.white)
+                .padding()
+                .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
+                .cornerRadius(15.0)
+                .opacity(show ? 1 : 0)
+                .animation(.easeInOut)
+                .onTapGesture {
+                    show = false
+                }
+            
         }.navigationBarHidden(true)
-        .onAppear{
-            UISegmentedControl.appearance().selectedSegmentTintColor = .orange
-            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.blue], for: .selected)
-            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
-        }
+//        .onTapGesture {
+//            hideKeyboard()
+//        }
+    
 //        .onAppear{
 //            UserDefaults.standard.set(false, forKey: "didLaunchBefore")
 //        }
@@ -153,8 +186,4 @@ extension RegistrationView {
     }
 }
 
-//struct RegistrationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RegistrationView()
-//    }
-//}
+
