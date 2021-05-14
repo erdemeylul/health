@@ -115,8 +115,8 @@ struct FeedCell: View {
     }
     
     func  getActionSheet() -> ActionSheet{
-        return ActionSheet(title: Text("Do you want to delete the post?"), message: nil, buttons: [
-            .destructive(Text("Delete"), action: {
+        return ActionSheet(title: Text("Paylaşımı silmek ister misiniz?"), message: nil, buttons: [
+            .destructive(Text("Sil"), action: {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     viewModel.deletePost()
@@ -124,7 +124,7 @@ struct FeedCell: View {
                 
             }),
             
-            .default(Text("Learn more..."), action: {
+            .default(Text(""), action: {
             }),
             
             .cancel()

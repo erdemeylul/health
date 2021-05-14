@@ -12,7 +12,7 @@ struct EditBio: View {
         VStack {
             HStack {
                 Button(action: { mode.wrappedValue.dismiss() }, label: {
-                    Text("Cancel")
+                    Text("İptal")
                 }).buttonStyle(AppButtonStyle2())
 
                 
@@ -22,12 +22,12 @@ struct EditBio: View {
                     viewModel.saveUserBio(bioText)
                     mode.wrappedValue.dismiss()
                 }, label: {
-                    Text("Done").bold()
+                    Text("Kabul").bold()
                 }).buttonStyle(AppButtonStyle())
 
             }.padding()
             
-            TextArea(text: $bioText, placeholder: "Add your bio..")
+            TextArea(text: $bioText, placeholder: "Bilgi Ekleyin...")
                 .frame(width: 370, height: 200)
                 .padding()
                 .background(Color.purple.opacity(0.25))

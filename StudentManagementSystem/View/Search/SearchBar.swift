@@ -7,7 +7,7 @@ struct SearchBar: View {
     
     var body: some View {
         HStack {
-            TextField("Search...", text: $text)
+            TextField("Ara...", text: $text)
                 .padding(8)
                 .padding(.horizontal, 24)
                 .background(Color(.systemGray6))
@@ -30,7 +30,7 @@ struct SearchBar: View {
                     text = ""
                     UIApplication.shared.endEditing()
                 }, label: {
-                    Text("Cancel")
+                    Text("İptal")
                         .foregroundColor(.black)
                 })
                 .padding(.trailing, 8)

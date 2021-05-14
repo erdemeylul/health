@@ -16,12 +16,12 @@ struct LoginView: View {
                 
                 
                 VStack {
-                    Text("Heheh")
+                    Text("Burada Logo olcak")
                         .frame(width: 220, height: 100)
                         .foregroundColor(.white)
                                         
                     VStack(spacing: 20) {
-                        CustomTextField(text: $email, placeholder: Text("Email"), imageName: "envelope")
+                        CustomTextField(text: $email, placeholder: Text("E-Posta"), imageName: "envelope")
                             .padding()
                             .background(Color(.init(white: 1, alpha: 0.15)))
                             .cornerRadius(10)
@@ -30,7 +30,7 @@ struct LoginView: View {
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
                         
-                        CustomSecureField(text: $password, placeholder: Text("Password"))
+                        CustomSecureField(text: $password, placeholder: Text("Şifre"))
                             .padding()
                             .background(Color(.init(white: 1, alpha: 0.15)))
                             .cornerRadius(10)
@@ -46,7 +46,7 @@ struct LoginView: View {
                         NavigationLink(
                             destination: ResetPasswordView(email: $email),
                             label: {
-                                Text("Forgot Password?")
+                                Text("Şifrenizi mi unuttunuz?")
                                     .font(.system(size: 13, weight: .semibold))
                                     .foregroundColor(.white)
                                     .padding(.top)
@@ -62,7 +62,7 @@ struct LoginView: View {
                             }
                         }
                     }, label: {
-                        Text("Sign In")
+                        Text("Giriş Yap")
                             .font(.headline)
                             .foregroundColor(email != "" && password != "" ? .white : .gray)
                             .frame(width: 360, height: 50)
@@ -77,10 +77,10 @@ struct LoginView: View {
                         destination: RegistrationView().navigationBarHidden(true),
                         label: {
                             HStack {
-                                Text("Don't have an account?")
+                                Text("Hesabıniz yok mu?")
                                     .font(.system(size: 14))
                                 
-                                Text("Sign Up")
+                                Text("Kayıt Ol")
                                     .font(.system(size: 14, weight: .semibold))
                             }.foregroundColor(.white)
                         }).padding(.bottom, 16)
@@ -89,7 +89,7 @@ struct LoginView: View {
                 .blur(radius: show ? 5 : 0)
                 
                 
-                Text("Fill in all the areas correctly")
+                Text("Tüm alanları doğru dolrudun")
                     .foregroundColor(Color.white)
                     .padding()
                     .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))

@@ -68,14 +68,14 @@ struct ProfileView: View {
                         Spacer()
                         
                         HStack(spacing: 16) {
-                            UserStatView(value: viewModel.posts, title: "Posts")
+                            UserStatView(value: viewModel.posts, title1: "", title2: "Paylaşimlar")
                             
                             NavigationLink(destination: FollowersView(user: viewModel.user)) {
-                                UserStatView(value: viewModel.followers, title: "Followers").foregroundColor(Color.primary)
+                                UserStatView(value: viewModel.followers, title1: "Takip", title2:"Edenler").foregroundColor(Color.primary)
                             }
                             
                             NavigationLink(destination: FollowingView(user: viewModel.user)) {
-                                UserStatView(value: viewModel.following, title: "Following").foregroundColor(Color.primary)
+                                UserStatView(value: viewModel.following, title1: "Takip", title2:" Edilenler").foregroundColor(Color.primary)
                             }
                         }.padding(.trailing, 32)
                     }
@@ -97,7 +97,7 @@ struct ProfileView: View {
                         //ProfileActionButtonView(viewModel: viewModel)
                         if viewModel.user.isCurrentUser {
                             Button(action: { showEditProfile.toggle() }, label: {
-                                Text("Edit Profile")
+                                Text("Bilgiyi Güncelleyin")
                                     .font(.system(size: 14, weight: .semibold))
                                     .frame(width: 360, height: 32)
                                     .foregroundColor(.black)
@@ -114,7 +114,7 @@ struct ProfileView: View {
                             VStack{
                                 HStack{
                                     Spacer()
-                                    if viewModel.user.role == "seller" {
+                                    if viewModel.user.role == "üretici" {
                                         if viewModel.ratingMean.count > 0 {
                                             ZStack{
                                                 Circle()
@@ -129,7 +129,7 @@ struct ProfileView: View {
                                                 .foregroundColor(Color.yellow)
                                                 .font(.system(size: 40))
                                         }else{
-                                            Text("No Ratings")
+                                            Text("Puanlama Yok")
                                         }
                                     }
                                     Spacer()
@@ -137,7 +137,7 @@ struct ProfileView: View {
                                 
                                 HStack {
                                     Button(action: { isFollowed ? viewModel.unFollow() : viewModel.follow() }, label: {
-                                        Text(isFollowed ? "Following" : "Follow")
+                                        Text(isFollowed ? "Takip ediliyor" : "Takip et")
                                             .font(.system(size: 14, weight: .semibold))
                                             .frame(width: 172, height: 32)
                                             .foregroundColor(isFollowed ? .black : .white)
@@ -149,7 +149,7 @@ struct ProfileView: View {
                                     }).cornerRadius(3)
 
                                     NavigationLink(destination: ChatView(otherUsername: viewModel.user.id ?? "")) {
-                                        Text("Message")
+                                        Text("Mesaj")
                                             .font(.system(size: 14, weight: .semibold))
                                             .frame(width: 172, height: 32)
                                             .foregroundColor(.black)
@@ -165,7 +165,7 @@ struct ProfileView: View {
                                     print(viewModel.user.role)
 
                                 }
-                                if viewModel.user.role == "seller" && model.currentUser?.role == "buyer" && !viewModel.ratingOwners.contains(model.userSession?.uid ?? "")
+                                if viewModel.user.role == "üretici" && model.currentUser?.role == "tüketici" && !viewModel.ratingOwners.contains(model.userSession?.uid ?? "")
                                 {
                                     ZStack{
                                         HStack{
@@ -185,7 +185,7 @@ struct ProfileView: View {
                                             } label: {
                                                 HStack {
                                                         Image(systemName: "star.square.fill")
-                                                        Text("Publish")
+                                                        Text("Paylaş")
                                                 }
                                             }.buttonStyle(GradientButtonStyle())
                                             

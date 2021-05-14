@@ -64,7 +64,7 @@ struct RegistrationView: View {
                 }
                 
                 VStack(spacing: 20) {
-                    CustomTextField(text: $email, placeholder: Text("Email"), imageName: "envelope")
+                    CustomTextField(text: $email, placeholder: Text("E-Posta"), imageName: "envelope")
                         .padding()
                         .background(Color(.init(white: 1, alpha: 0.15)))
                         .cornerRadius(10)
@@ -73,7 +73,7 @@ struct RegistrationView: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                     
-                    CustomTextField(text: $username, placeholder: Text("Username"), imageName: "person.crop.circle.fill")
+                    CustomTextField(text: $username, placeholder: Text("Kullanıcı Adı"), imageName: "person.crop.circle.fill")
                         .padding()
                         .background(Color(.init(white: 1, alpha: 0.15)))
                         .cornerRadius(10)
@@ -82,7 +82,7 @@ struct RegistrationView: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         
-                    CustomTextField(text: $city, placeholder: Text("City"), imageName: "building.2.crop.circle.fill")
+                    CustomTextField(text: $city, placeholder: Text("Şehir"), imageName: "building.2.crop.circle.fill")
                         .padding()
                         .background(Color(.init(white: 1, alpha: 0.15)))
                         .cornerRadius(10)
@@ -92,7 +92,7 @@ struct RegistrationView: View {
                         .disableAutocorrection(true)
             
 
-                    CustomSecureField(text: $password, placeholder: Text("Password"))
+                    CustomSecureField(text: $password, placeholder: Text("Şifre"))
                         .padding()
                         .background(Color(.init(white: 1, alpha: 0.15)))
                         .cornerRadius(10)
@@ -102,13 +102,13 @@ struct RegistrationView: View {
                         .disableAutocorrection(true)
                     
                     Section(header:
-                                Text("Choose your status")
+                                Text("Rolünüzü seçiniz")
                                 .foregroundColor(Color.orange)
                                 .fontWeight(.bold)
                     ) {
                         Picker(selection: $role, label: Text("")){
-                            Text("seller").tag("seller")
-                            Text("buyer").tag("buyer")
+                            Text("üretici").tag("üretici")
+                            Text("tüketici").tag("tüketici")
                         }.pickerStyle(SegmentedPickerStyle())
                         .padding(.top, -10)
                     }
@@ -125,7 +125,7 @@ struct RegistrationView: View {
                         }
                     }
                 }, label: {
-                    Text("Sign Up")
+                    Text("Kayıt Ol")
                         .font(.headline)
                         .foregroundColor(email != "" && password != "" && username != "" && role != "" && city != "" && image != nil ? .white : .gray)
                         .frame(width: 360, height: 50)
@@ -141,10 +141,10 @@ struct RegistrationView: View {
                 
                 Button(action: { mode.wrappedValue.dismiss() }, label: {
                     HStack {
-                        Text("Already have an account?")
+                        Text("Hesabıniz var mı?")
                             .font(.system(size: 14))
                         
-                        Text("Sign In")
+                        Text("Giriş Yap")
                             .font(.system(size: 14, weight: .semibold))
                     }.foregroundColor(.white)
                 })
@@ -152,7 +152,7 @@ struct RegistrationView: View {
                 
             }.blur(radius: show ? 5 : 0)
 
-            Text("Fill in all the areas correctly")
+            Text("Tüm alanları doğru dolrudun")
                 .foregroundColor(Color.white)
                 .padding()
                 .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))

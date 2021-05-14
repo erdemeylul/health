@@ -31,9 +31,9 @@ enum NotificationType: Int, Decodable{
     
     var notifitcationMessage: String{
         switch self {
-        case .like: return " liked one of your posts"
-        case .comment: return " commented on your post"
-        case .follow: return " started following you"
+        case .like: return " gönderini beğendi"
+        case .comment: return " gönderine yorum yaptı"
+        case .follow: return " seni takibe aldı"
         }
     }
 }

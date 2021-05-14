@@ -25,9 +25,10 @@ struct ConversationListView: View {
             ScrollView(.vertical){
 
                 BaseViewContainer {
-                            Text("Inbox")
+                            Text("Gelen Kutusu")
                             //Image(systemName: "envelope.fill")
                 }.padding(.top, -70)
+                .padding(.bottom, 20)
                 
                 ForEach(model.conversations, id:\.self){ name in
                     NavigationLink(destination: ChatView(otherUsername: name)){
@@ -87,7 +88,6 @@ struct ConversationListView: View {
                     //ennavlink
                     .simultaneousGesture(TapGesture().onEnded{
                         model.readMessage(name: name)
-                        print("DEBUG hehe \(model.unreadMessage.count)")
                     })
                 }
                 .padding(.top, -30)

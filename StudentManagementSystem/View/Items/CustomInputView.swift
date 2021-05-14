@@ -20,12 +20,12 @@ struct CustomInputView: View {
                 .padding(.bottom, 8)
             
             HStack {
-                TextField("Comment...", text: $inputText)
+                TextField("Yorum...", text: $inputText)
                     .textFieldStyle(PlainTextFieldStyle())
                     .frame(minHeight: 30)
                 
                 Button(action: action) {
-                    Text("Send")
+                    Text("Gönder")
                         .bold()
                         .foregroundColor(.black)
                 }

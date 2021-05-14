@@ -4,12 +4,13 @@ import SwiftUI
 
 struct OnboardingView: View {
     
+  //var hehe = ["ÇğçşıİŞüÖö"]
   
   var onboardingData: [OnboardingItem] = [
-    OnboardingItem(imageName: "1", title: "Dogal urun ureticisiyim", description: "O zaman oncelikle kayit sayfasinda `uretici` bolmesini sec ve uretim yaptigin `sehri` belirt. Peynir, sut, recel, yogurt, kefir, salca, tursu, zeytin, zeytinyagi gibi urunlerin yaninda, ev yemekleri ureticilerinin urunleri de uygulama kapsamina dahildir."),
-    OnboardingItem(imageName: "2", title: "Kendimi nasil gosteririm?", description: "Profil sayfani detayli olarak doldur ve yaptigin harika urunleri resimlerle paylas. Unutma, guzel resimler cekmek isin sadece gosteris kismi. Yaptiklarinin kalitesi ve prensipli calisma ilkelerin tuketicilerden alacagin puani belileyecek"),
-    OnboardingItem(imageName: "3", title: "Dogal beslenmeliyim!", description: "Kendin ve ailen icin en saglikli yolu sectin! Kar etmeyi is etiginin onun ekoyan dev isletmelerin sundugu tehlikeli paketli gidalardan sakinmak herkes icin bir secenek olmali. Iste bu secenek artik parmaklarinizin ucunda."),
-    OnboardingItem(imageName: "4", title: "Ureticilere nasil ulasirim?", description: "Kayit sayfasinda `tuketici` bolmesini sec ve yasadigin `sehri` belirt. Uygulamaya girince kesfet bolmesinden isim veya sehir bazli arama yapabilirsin. Ureticileri takip etmeye basladikca uygulamanin ana ekrani leziz urunlerle dolacak!")
+    OnboardingItem(imageName: "1", title: "Doğal ürün üreticisiyim", description: "O zaman öncelikle kayıt sayfasında `üretici` bölmesini seç ve üretim yaptığın `şehri` belirt. Peynir, süt, reçel, yoğurt, kefir, salça, turşu, zeytin, bal, zeytinyağı gibi ürünlerin yaninda, ev yemekleri üreticilerinin ürünleri de uygulama kapsamına dahildir."),
+    OnboardingItem(imageName: "2", title: "Kendimi nasıl gösteririm?", description: "Profil sayfanı detaylı olarak doldur ve yaptığın harika urunleri resimlerle paylaş. Unutma, güzel resimler çekmek işin sadece gösteriş kısmı. Yaptıklarının kalitesi ve prensipli çalışma ilkelerin tüketicilerden alacağın puanı belileyecek"),
+    OnboardingItem(imageName: "3", title: "Doğal beslenmeliyim!", description: "Kendin ve ailen için en sağlıklı yolu seçtin! Kar etmeyi iş etiğinin önüne koyan dev işletmelerin sunduğu tehlikeli paketli gıdalardan sakınmak herkes için bir seçenek olmalı. İşte bu seçenek artık parmaklarının ucunda."),
+    OnboardingItem(imageName: "4", title: "Üreticilere nasıl ulaşırım?", description: "Kayıt sayfasında `tüketici` bölmesini seç ve yaşadiğin `şehri` belirt. Uygulamaya girince keşfet bölmesinden isim veya şehir bazlı arama yapabilirsin. Üreticileri takip etmeye başladıkça uygulamanın ana ekranı leziz ürünlerle dolacak!")
   ]
   
   var body: some View {
@@ -23,7 +24,7 @@ struct OnboardingView: View {
                     NavigationLink(
                       destination: RegistrationView(),
                       label: {
-                          Text("GET STARTED")
+                          Text("HAYDİ BAŞLAYALIM!")
                             .frame(maxWidth: .infinity)
                             .padding()
                             .foregroundColor(.white)

@@ -90,8 +90,8 @@ struct PostFeed: View {
 //                    }
 //                })
                 .actionSheet(isPresented: $showActionSheet, content: {
-                    ActionSheet(title: Text("What do you want to do?"), message: nil, buttons: [
-                        .default(Text("Delete")){
+                    ActionSheet(title: Text("Ne Yapmak İstiyorsun?"), message: nil, buttons: [
+                        .default(Text("Sil")){
                             viewModel.deletePost()
                             presentationMode.wrappedValue.dismiss()
                             //viewModel.fetchPostUser()

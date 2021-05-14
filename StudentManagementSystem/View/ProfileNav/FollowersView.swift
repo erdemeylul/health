@@ -15,7 +15,7 @@ struct FollowersView: View {
     
     var body: some View {
         ScrollView {
-                Text("Follower List")
+                Text("Takip Edenler Listesi")
                 ForEach(users.shuffled(), id:\.id) { user in
                     NavigationLink(
                         destination: LazyView(ProfileView(user: user)),

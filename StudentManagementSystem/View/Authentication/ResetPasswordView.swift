@@ -24,7 +24,7 @@ struct ResetPasswordView: View {
                     .foregroundColor(.white)
                                     
                 VStack(spacing: 20) {
-                    CustomTextField(text: $email, placeholder: Text("Email"), imageName: "envelope")
+                    CustomTextField(text: $email, placeholder: Text("E-Posta"), imageName: "envelope")
                         .padding()
                         .background(Color(.init(white: 1, alpha: 0.15)))
                         .cornerRadius(10)
@@ -36,7 +36,7 @@ struct ResetPasswordView: View {
                     viewModel.resetPassword(withEmail: email)
                     
                 }, label: {
-                    Text("Send Reset Password Link")
+                    Text("Şifreyi sıfırla")
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(width: 360, height: 50)
@@ -49,10 +49,10 @@ struct ResetPasswordView: View {
                 
                 Button(action: { mode.wrappedValue.dismiss() }, label: {
                     HStack {
-                        Text("Already have an account?")
+                        Text("Hesabıniz var mı?")
                             .font(.system(size: 14))
                         
-                        Text("Sign In")
+                        Text("Giriş Yap")
                             .font(.system(size: 14, weight: .semibold))
                     }.foregroundColor(.white)
                 })

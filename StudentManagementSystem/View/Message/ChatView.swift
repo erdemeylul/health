@@ -103,7 +103,7 @@ struct ChatView: View {
                 }
             
             HStack{
-                TextField("message...", text: $message)
+                TextField("mesaj...", text: $message)
                     .modifier(CustomField())
                     .disableAutocorrection(true)
                     

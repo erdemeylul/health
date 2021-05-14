@@ -82,7 +82,7 @@ struct MainTabView: View {
         Button {
             AuthViewModel.shared.signout()
         } label: {
-            Text("Logout").foregroundColor(.black)
+            Text("Çıkış").foregroundColor(.black)
         }
     }
     
@@ -90,11 +90,11 @@ struct MainTabView: View {
     
     var tabTitle: String {
         switch selectedIndex {
-        case 0: return "Feed"
-        case 1: return "Explore"
-        case 2: return "Post"
-        case 3: return "Notifications"
-        case 4: return "Profile"
+        case 0: return "Ana Sayfa"
+        case 1: return "Keşfet"
+        case 2: return "Paylaşım"
+        case 3: return "Bildirimler"
+        case 4: return "Profil"
 
         default: return ""
         }

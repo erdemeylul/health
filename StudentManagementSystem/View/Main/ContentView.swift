@@ -20,11 +20,11 @@ struct ContentView: View {
                     LoginView()
                 }
             }else{
-                if viewModel.currentUser?.role == "seller"{
+                if viewModel.currentUser?.role == "üretici"{
                     if let user = viewModel.currentUser{
                         MainTabView(user: user, selectedIndex: $selectedIndex)
                     }
-                }else if viewModel.currentUser?.role == "buyer" {
+                }else if viewModel.currentUser?.role == "tüketici" {
                     if let user = viewModel.currentUser{
                         MainTabView(user: user, selectedIndex: $selectedIndex)
                     }

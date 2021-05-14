@@ -33,7 +33,7 @@ struct UploadPostView: View {
                         .frame(width: 96, height: 96)
                         .clipped()
                     
-                    TextArea(text: $captionText, placeholder: "Enter your caption..")
+                    TextArea(text: $captionText, placeholder: "Bilgi gir...")
                         .frame(height: 200)
                         .background(Color.purple.opacity(0.12))
                 }.padding()
@@ -43,7 +43,7 @@ struct UploadPostView: View {
                         captionText = ""
                         postImage = nil
                     }, label: {
-                        Text("Cancel")
+                        Text("İptal")
                             .font(.system(size: 16, weight: .semibold))
                             .frame(width: 172, height: 50)
                             .background(Color.red)
@@ -60,7 +60,7 @@ struct UploadPostView: View {
                             }
                         }
                     }, label: {
-                        Text("Share")
+                        Text("Paylaş")
                             .font(.system(size: 16, weight: .semibold))
                             .frame(width: 172, height: 50)
                             .background(Color.blue)

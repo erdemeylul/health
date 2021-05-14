@@ -21,7 +21,7 @@ struct PostGridView: View {
     
     var body: some View {
         VStack{
-            Text("Most Liked Posts")
+            Text("En Beğenilen Paylaşımlar")
             LazyVGrid(columns: items, spacing: 2, content: {
                 ForEach(viewModel.posts) { post in
                     NavigationLink(

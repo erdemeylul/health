@@ -12,7 +12,7 @@ struct UserListView: View {
     var body: some View {
         ScrollView {
             LazyVStack {
-                Text("Seller List")
+                Text("Üretici Listesi")
                 ForEach(users.shuffled()) { user in
                     NavigationLink(
                         destination: LazyView(ProfileView(user: user)),

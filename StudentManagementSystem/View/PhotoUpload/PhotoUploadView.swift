@@ -32,7 +32,7 @@ struct PhotoUploadView: View {
                     sourceType = UIImagePickerController.SourceType.camera
                     showImagePicker.toggle()
                 }, label: {
-                    Text("Take photo".uppercased())
+                    Text("RESİM ÇEK".uppercased())
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(Color.orange)
@@ -44,7 +44,7 @@ struct PhotoUploadView: View {
                     sourceType = UIImagePickerController.SourceType.photoLibrary
                     showImagePicker.toggle()
                 }, label: {
-                    Text("Import photo".uppercased())
+                    Text("RESİM AKTAR".uppercased())
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(Color.purple)
