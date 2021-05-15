@@ -50,11 +50,11 @@ struct PostImageView: View {
                 }
                 
                 
-                TextField("Add your caption here..", text: $captionText)
+                TextField("Buraya bilgi gir..", text: $captionText)
                     .padding()
                     .frame(height: 60)
                     .frame(maxWidth: .infinity)
-                    .background(colorScheme == .light ? Color.white : Color.purple)
+                    .background(Color.purple.opacity(0.25))
                     .cornerRadius(12)
                     .font(.headline)
                     .padding(.horizontal)
@@ -73,7 +73,7 @@ struct PostImageView: View {
                         }
                     }
                 }, label: {
-                    Text("Post Picture!".uppercased())
+                    Text("Yükle!".uppercased())
                         .font(.title3)
                         .fontWeight(.bold)
                         .padding()
@@ -117,12 +117,12 @@ struct PostImageView: View {
         
         if postUploadedSuccessfully {
             
-            return Alert(title: Text("Successfully uploaded post! 🥳"), message: nil, dismissButton: .default(Text("OK"), action: {
+            return Alert(title: Text("Başariyla yüklendi! 🥳"), message: nil, dismissButton: .default(Text("OK"), action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
             
         } else {
-            return Alert(title: Text("Error uploading post 😭"))
+            return Alert(title: Text("Hata! 😭"))
         }
         
     }

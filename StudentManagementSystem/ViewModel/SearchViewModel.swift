@@ -17,7 +17,7 @@ class SearchViewModel: ObservableObject{
     }
     
     func fetchUsers(){
-        Firestore.firestore().collection("users").whereField("role", isEqualTo: "seller").getDocuments { snapshot, _ in
+        Firestore.firestore().collection("users").whereField("role", isEqualTo: "üretici").getDocuments { snapshot, _ in
             guard let documents = snapshot?.documents else {return}
             
             self.users = documents.compactMap ({try? $0.data(as: User.self)})

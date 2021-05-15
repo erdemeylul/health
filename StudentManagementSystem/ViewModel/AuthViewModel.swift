@@ -12,6 +12,7 @@ class AuthViewModel: ObservableObject{
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     @Published var didSendResetPasswordLink = false
+    @Published var show = false
     
     static let shared = AuthViewModel()
     
@@ -24,6 +25,7 @@ class AuthViewModel: ObservableObject{
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 print(error.localizedDescription)
+                self.show = true
                 return
             }
             
@@ -39,6 +41,7 @@ class AuthViewModel: ObservableObject{
             Auth.auth().createUser(withEmail: email, password: password) { result, error in
                 if let error = error {
                     print(error.localizedDescription)
+                    self.show = true
                     return
                 }
                 guard let user = result?.user else {return}
@@ -70,6 +73,7 @@ class AuthViewModel: ObservableObject{
         Auth.auth().sendPasswordReset(withEmail: email) {error in
             if let error = error{
                 print("failed to send link \(error.localizedDescription)")
+                self.show = true
                 return
             }
             self.didSendResetPasswordLink = true

@@ -52,30 +52,31 @@ fileprivate struct OnboardingCard: View {
 
   
   var body: some View {
-    GeometryReader { geometry in
-      VStack {
-        Image(onboardingItem.imageName)
-          .resizable()
-          .frame(height: geometry.size.height / 1.7)
-          .frame(maxWidth: .infinity)
-          .scaleEffect(isAnimating ? 1 : 0.8)
+    GeometryReader { proxy -> AnyView in
+        let minX = proxy.frame(in: .global).minX
+        let width = UIScreen.main.bounds.width
+        let progress = -minX / (width*2)
+        var scale = progress > 0 ? 1 - progress : 1 + progress
+        scale = scale < 0.7 ? 0.7 : scale
+        
+      return AnyView(
+        VStack {
+          Image(onboardingItem.imageName)
+            .resizable()
+            .frame(maxWidth: .infinity, maxHeight: 400)
 
-        Text(onboardingItem.title)
-          .font(.title)
-          .foregroundColor(.primary)
-          .bold()
-          .padding()
-        Text(onboardingItem.description)
-          .multilineTextAlignment(.center)
-          .font(.body)
-          .foregroundColor(.primary)
-          .padding(.horizontal, 15)
-      }  .onAppear(perform: {
-        isAnimating = false
-        withAnimation(.easeOut(duration: 0.8)) {
-            self.isAnimating = true
-        }
-    })
+          Text(onboardingItem.title)
+            .font(.title)
+            .foregroundColor(.primary)
+            .bold()
+            .padding()
+          Text(onboardingItem.description)
+            .multilineTextAlignment(.center)
+            .font(.body)
+            .foregroundColor(.primary)
+            .padding(.horizontal, 15)
+        }.scaleEffect(scale)
+      )
     }
   }
 }

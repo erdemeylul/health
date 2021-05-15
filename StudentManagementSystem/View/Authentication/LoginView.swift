@@ -56,11 +56,7 @@ struct LoginView: View {
                                         
                     Button(action: {
                         viewModel.login(withEmail: email, password: password)
-                        if viewModel.userSession == nil{
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                show = true
-                            }
-                        }
+   
                     }, label: {
                         Text("Giriş Yap")
                             .font(.headline)
@@ -86,20 +82,21 @@ struct LoginView: View {
                         }).padding(.bottom, 16)
                 }
                 .padding(.top, -44)
-                .blur(radius: show ? 5 : 0)
+                .blur(radius: viewModel.show ? 5 : 0)
                 
                 
-                Text("Tüm alanları doğru dolrudun")
+                Text("Tüm alanları doğru doldurun")
                     .foregroundColor(Color.white)
                     .padding()
                     .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
                     .cornerRadius(15.0)
-                    .opacity(show ? 1 : 0)
+                    .opacity(viewModel.show ? 1 : 0)
                     .animation(.easeInOut)
-                    .onTapGesture {
-                        show = false
-                    }
             }
+        }
+        .onTapGesture {
+            hideKeyboard()
+            viewModel.show = false
         }
 //        .onAppear{
 //            UserDefaults.standard.set(false, forKey: "didLaunchBefore")

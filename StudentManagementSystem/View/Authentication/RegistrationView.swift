@@ -92,7 +92,7 @@ struct RegistrationView: View {
                         .disableAutocorrection(true)
             
 
-                    CustomSecureField(text: $password, placeholder: Text("Şifre"))
+                    CustomSecureField(text: $password, placeholder: Text("Şifre(En az 6 karakter)"))
                         .padding()
                         .background(Color(.init(white: 1, alpha: 0.15)))
                         .cornerRadius(10)
@@ -101,29 +101,28 @@ struct RegistrationView: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                     
-                    Section(header:
-                                Text("Rolünüzü seçiniz")
-                                .foregroundColor(Color.orange)
-                                .fontWeight(.bold)
-                    ) {
-                        Picker(selection: $role, label: Text("")){
-                            Text("üretici").tag("üretici")
-                            Text("tüketici").tag("tüketici")
-                        }.pickerStyle(SegmentedPickerStyle())
-                        .padding(.top, -10)
-                    }
-                    .padding(.bottom, 20)
-                    .padding(.horizontal, 20)
+                    Picker(selection: $role, label:
+                            HStack{
+                                Text("Rolünüzü Seçiniz=")
+                                Text(role)
+                            }.font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .padding(.horizontal)
+                            .background(Color.orange)
+                            .cornerRadius(10)
+                            .shadow(color: Color.blue.opacity(0.4), radius: 10, x: 0, y: 10)
+                           ,
+                           content: {
+                        Text("üretici").tag("üretici")
+                        Text("tüketici").tag("tüketici")
+                           }).pickerStyle(MenuPickerStyle())
                 }
 
                 
                 Button(action: {
                     viewModel.resgister(withEmail: email, password: password, image: selectedImage, username: username, role: role, city: city)
-                    if viewModel.userSession == nil{
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            show = true
-                        }
-                    }
+                    
                 }, label: {
                     Text("Kayıt Ol")
                         .font(.headline)
@@ -150,23 +149,22 @@ struct RegistrationView: View {
                 })
                 
                 
-            }.blur(radius: show ? 5 : 0)
+            }.blur(radius: viewModel.show ? 5 : 0)
 
-            Text("Tüm alanları doğru dolrudun")
+            Text("Tüm alanları doğru doldurun")
                 .foregroundColor(Color.white)
                 .padding()
                 .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(15.0)
-                .opacity(show ? 1 : 0)
+                .opacity(viewModel.show ? 1 : 0)
                 .animation(.easeInOut)
-                .onTapGesture {
-                    show = false
-                }
+                
             
         }.navigationBarHidden(true)
-//        .onTapGesture {
-//            hideKeyboard()
-//        }
+        .onTapGesture {
+            hideKeyboard()
+            viewModel.show = false
+        }
     
 //        .onAppear{
 //            UserDefaults.standard.set(false, forKey: "didLaunchBefore")

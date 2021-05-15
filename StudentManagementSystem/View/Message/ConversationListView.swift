@@ -25,7 +25,7 @@ struct ConversationListView: View {
             ScrollView(.vertical){
 
                 BaseViewContainer {
-                            Text("Gelen Kutusu")
+                            Text("Posta Kutusu")
                             //Image(systemName: "envelope.fill")
                 }.padding(.top, -70)
                 .padding(.bottom, 20)

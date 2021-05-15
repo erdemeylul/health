@@ -45,6 +45,7 @@ struct ResetPasswordView: View {
                         .padding()
                 })
                 
+                
                 Spacer()
                 
                 Button(action: { mode.wrappedValue.dismiss() }, label: {
@@ -58,7 +59,19 @@ struct ResetPasswordView: View {
                 })
             }
             .padding(.top, -44)
-        }
+        }.blur(radius: viewModel.show ? 5 : 0)
+        
+        Text("E-posta alanını doğru doldurun")
+            .foregroundColor(Color.white)
+            .padding()
+            .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
+            .cornerRadius(15.0)
+            .opacity(viewModel.show ? 1 : 0)
+            .animation(.easeInOut)
+            .onTapGesture {
+                viewModel.show = false
+            }
+
         .onReceive(viewModel.$didSendResetPasswordLink, perform: { _ in
             self.mode.wrappedValue.dismiss()
         })
