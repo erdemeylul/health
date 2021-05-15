@@ -68,12 +68,14 @@ struct ResetPasswordView: View {
             .cornerRadius(15.0)
             .opacity(viewModel.show ? 1 : 0)
             .animation(.easeInOut)
-            .onTapGesture {
-                viewModel.show = false
-            }
+            
 
         .onReceive(viewModel.$didSendResetPasswordLink, perform: { _ in
             self.mode.wrappedValue.dismiss()
         })
+        
+        .onTapGesture {
+            viewModel.show = false
+        }
     }
 }
