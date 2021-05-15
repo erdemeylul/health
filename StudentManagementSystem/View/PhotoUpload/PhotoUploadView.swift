@@ -78,9 +78,11 @@ struct PhotoUploadView: View {
     // MARK: FUNCTIONS
     
     func segueToPostImageView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            loadImage()
-            showPostImageView.toggle()
+        if selectedImage != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                loadImage()
+                showPostImageView.toggle()
+            }
         }
     }
     
