@@ -74,7 +74,7 @@ struct MainTabView: View {
                     }
                 }))
 
-            .accentColor(.black)
+            .accentColor(.orange)
         }
     }
     
@@ -82,7 +82,7 @@ struct MainTabView: View {
         Button {
             AuthViewModel.shared.signout()
         } label: {
-            Text("Çıkış").foregroundColor(.black)
+            Text("Çıkış").foregroundColor(.red)
         }
     }
     

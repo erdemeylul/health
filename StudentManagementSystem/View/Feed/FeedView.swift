@@ -9,9 +9,14 @@ import SwiftUI
 
 struct FeedView: View {
     @StateObject var viewModel = FeedViewModel()
+    @EnvironmentObject var model: AuthViewModel
+    @State var show = false
+
     
     var body: some View {
+        
         ScrollView{
+           
             VStack(spacing: 32){
                 if !viewModel.users.isEmpty{
                     ForEach(viewModel.posts){ post in
@@ -19,12 +24,13 @@ struct FeedView: View {
                     }
                 }
             }.onAppear{
-                //viewModel.fetchPosts()
                 viewModel.fetchFollowers()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    show = true
+                }
             }
             .padding(.top)
         }
     }
-    
 }
 

@@ -23,7 +23,10 @@ struct CommentsView: View {
                         CommentCell(viewModel: CommentCellViewModel(comment: comment, post: viewModel.post))
                     }
                 }
-            }.padding(.top)
+            }.onTapGesture {
+                hideKeyboard()
+            }
+            .padding(.top)
             
             CustomInputView(inputText: $commentText, action: uploadComment)
         }

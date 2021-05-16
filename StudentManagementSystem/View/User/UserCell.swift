@@ -9,11 +9,6 @@ struct UserCell: View {
     
     var body: some View {
         HStack {
-//            KFImage(URL(string: user.profileImageUrl))
-//                .resizable()
-//                .scaledToFill()
-//                .frame(width: 48, height: 48)
-//                .clipShape(Circle())
             URLImage(url: URL(string: user.profileImageUrl)!) {image in
                 image
                     .resizable()
@@ -28,7 +23,7 @@ struct UserCell: View {
                 
                 Text(user.city)
                     .font(.system(size: 14))
-            }
+            }.foregroundColor(.primary)
             
             Spacer()
         }

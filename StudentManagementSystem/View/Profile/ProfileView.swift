@@ -89,6 +89,7 @@ struct ProfileView: View {
                             .font(.system(size: 15))
                             .padding(.leading)
                             .padding(.top, 1)
+                            .foregroundColor(.primary)
                     }
                      
                     HStack {
@@ -100,7 +101,7 @@ struct ProfileView: View {
                                 Text("Bilgiyi Güncelleyin")
                                     .font(.system(size: 14, weight: .semibold))
                                     .frame(width: 360, height: 32)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.primary)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 3)
                                             .stroke(Color.gray, lineWidth: 1)
@@ -152,7 +153,7 @@ struct ProfileView: View {
                                         Text("Mesaj")
                                             .font(.system(size: 14, weight: .semibold))
                                             .frame(width: 172, height: 32)
-                                            .foregroundColor(.black)
+                                            .foregroundColor(.primary)
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 3)
                                                     .stroke(Color.gray, lineWidth: 1)

@@ -31,7 +31,7 @@ struct SearchBar: View {
                     UIApplication.shared.endEditing()
                 }, label: {
                     Text("İptal")
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                 })
                 .padding(.trailing, 8)
                 //.transition(.move(edge: .trailing))

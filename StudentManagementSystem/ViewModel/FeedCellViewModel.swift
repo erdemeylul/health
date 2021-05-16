@@ -79,7 +79,6 @@ class FeedCellViewModel: ObservableObject{
 
         Firestore.firestore().collection("users").document(post.ownerUid).getDocument { snapshot, _ in
             self.post.user = try? snapshot?.data(as: User.self)
-            print("DEBUG eylul bu kadar cektim")
         }
     }
 }

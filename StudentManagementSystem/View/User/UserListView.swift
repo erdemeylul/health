@@ -21,6 +21,8 @@ struct UserListView: View {
                                 .padding(.leading)
                         })
                 }
+            }.onTapGesture {
+                hideKeyboard()
             }
         }
     }

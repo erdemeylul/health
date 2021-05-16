@@ -59,7 +59,7 @@ struct PhotoUploadView: View {
                     .accentColor(colorScheme == .light ? Color.purple : Color.orange)
             })
             
-            Image("bg")
+            Image("group")
                 .resizable()
                 .scaledToFit()
                 .clipShape(Circle())

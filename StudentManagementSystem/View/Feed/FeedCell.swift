@@ -35,6 +35,7 @@ struct FeedCell: View {
                         
                         Text(viewModel.post.ownerUsername)
                             .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(.primary)
                     }else{
                         NavigationLink(destination: ProfileView(user: user)) {
                             URLImage(url: URL(string: user.profileImageUrl)!) {image in
@@ -47,6 +48,7 @@ struct FeedCell: View {
                             
                             Text(viewModel.post.ownerUsername)
                                 .font(.system(size: 14, weight: .semibold))
+                                .foregroundColor(.primary)
                         }
                     }
                 }
@@ -74,19 +76,20 @@ struct FeedCell: View {
                     Image(systemName: didLike ? "heart.fill" : "heart")
                         .resizable()
                         .scaledToFill()
-                        .foregroundColor(didLike ? .red : .black)
+                        .foregroundColor(didLike ? .red : .primary)
                         .frame(width: 20, height: 20)
                         .font(.system(size: 20))
                         .padding(4)
                 })
                 
                 NavigationLink(destination: CommentsView(post: viewModel.post)) {
-                    Image(systemName: "bubble.right")
+                    Image(systemName: "doc.append.fill")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 20, height: 20)
                         .font(.system(size: 20))
                         .padding(4)
+                        .foregroundColor(.primary)
                 }
                 Spacer()
             }

@@ -77,24 +77,14 @@ struct PostFeed: View {
                                 .font(.system(size: 14, weight: .semibold))
                         }
                     }
-
-                    
                 }
                  
                 Spacer()
-//                Button(action: {
-//                    showActionSheet.toggle()
-//                }, label: {
-//                    if auth.currentUser?.id == viewModel.post.ownerUid{
-//                        Image(systemName: "ellipsis")
-//                    }
-//                })
                 .actionSheet(isPresented: $showActionSheet, content: {
-                    ActionSheet(title: Text("Ne Yapmak İstiyorsun?"), message: nil, buttons: [
+                    ActionSheet(title: Text("Paylaşımı silmek mi istiyorsun?"), message: nil, buttons: [
                         .default(Text("Sil")){
                             viewModel.deletePost()
                             presentationMode.wrappedValue.dismiss()
-                            //viewModel.fetchPostUser()
                         },
                         .cancel()
                     ])
@@ -121,23 +111,24 @@ struct PostFeed: View {
                     Image(systemName: didLike ? "heart.fill" : "heart")
                         .resizable()
                         .scaledToFill()
-                        .foregroundColor(didLike ? .red : .black)
+                        .foregroundColor(didLike ? .red : .primary)
                         .frame(width: 20, height: 20)
                         .font(.system(size: 20))
                         .padding(4)
                 })
                 
                 NavigationLink(destination: CommentsView(post: viewModel.post)) {
-                    Image(systemName: "bubble.right")
+                    Image(systemName: "doc.append.fill")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 20, height: 20)
                         .font(.system(size: 20))
                         .padding(4)
+                        .foregroundColor(.primary)
                 }
             }
             .padding(.leading, 4)
-            .foregroundColor(.black)
+            .foregroundColor(.primary)
             
             // caption
             
@@ -162,8 +153,3 @@ struct PostFeed: View {
     }
 }
 
-struct PostFeed_Previews: PreviewProvider {
-    static var previews: some View {
-        PostFeed(viewModel: FeedCellViewModel(post: postExample ))
-    }
-}

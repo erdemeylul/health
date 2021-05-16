@@ -48,7 +48,7 @@ struct ConversationListView: View {
                                                     .padding()}
                                             Text(user.username)
                                                 .bold()
-                                                .foregroundColor(.black)
+                                                .foregroundColor(.primary)
                                                 .font(.system(size: 32))
                                             
                                             

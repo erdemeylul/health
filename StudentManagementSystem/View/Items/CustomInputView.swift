@@ -23,11 +23,12 @@ struct CustomInputView: View {
                 TextField("Yorum...", text: $inputText)
                     .textFieldStyle(PlainTextFieldStyle())
                     .frame(minHeight: 30)
+                    .foregroundColor(.primary)
                 
                 Button(action: action) {
                     Text("Gönder")
                         .bold()
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                 }
             }
             .padding(.bottom, 8)

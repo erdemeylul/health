@@ -28,21 +28,5 @@ struct ProfilePosts: View {
                     })
             }
         })
-        
-//        LazyVGrid(columns: items, spacing: 2, content: {
-//            ForEach(viewModel.posts) { post in
-//                Button(action: {
-//                    isPresented.toggle()
-//                }, label: {
-//                    KFImage(URL(string: post.imageUrl))
-//                        .resizable()
-//                        .scaledToFill()
-//                        .frame(width: width, height: width)
-//                        .clipped()
-//                }).sheet(isPresented: $isPresented ,content: {
-//                    PostFeed(viewModel: FeedCellViewModel(post: post))
-//                })
-//            }
-//        })
     }
 }

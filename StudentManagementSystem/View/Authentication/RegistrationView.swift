@@ -103,7 +103,7 @@ struct RegistrationView: View {
                     
                     Picker(selection: $role, label:
                             HStack{
-                                Text("Rolünüzü Seçiniz=")
+                                Text("Rolünüzü Seçiniz: ")
                                 Text(role)
                             }.font(.headline)
                             .foregroundColor(.white)
