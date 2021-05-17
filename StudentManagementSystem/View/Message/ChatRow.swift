@@ -38,9 +38,9 @@ struct ChatRow: View {
                     .foregroundColor(isSender ? Color.white : Color(.label))
                     .padding()
                     .lineLimit(nil)
-            }.background(isSender ? Color.purple : Color(.systemGray4))
-            //.padding(isSender ? .leading : .trailing, isSender ? UIScreen.main.bounds.width/3 : UIScreen.main.bounds.width/5)
+            }.background(isSender ? Color("kucukmor") : Color("krem"))
             .cornerRadius(12)
+            .shadow(color: .gray, radius: 2, x: -5, y: 5)
             if !isSender {Spacer()}
         }
     }

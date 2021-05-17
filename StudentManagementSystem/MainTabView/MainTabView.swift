@@ -62,7 +62,7 @@ struct MainTabView: View {
                         Image(systemName: "envelope.circle")
                             .font(.system(size:33))
                             .aspectRatio(contentMode: .fit)
-                            .foregroundColor(Color.green)
+                            .foregroundColor(Color("koyuyesil"))
                             .frame(width: 60, height:60)
                         Circle()
                             .foregroundColor(Color.red)
@@ -74,7 +74,7 @@ struct MainTabView: View {
                     }
                 }))
 
-            .accentColor(.orange)
+            .accentColor(Color("koyuyesil"))
         }
     }
     
@@ -82,7 +82,7 @@ struct MainTabView: View {
         Button {
             AuthViewModel.shared.signout()
         } label: {
-            Text("Çıkış").foregroundColor(.red)
+            Text("Çıkış").foregroundColor(Color("kucukmor"))
         }
     }
     

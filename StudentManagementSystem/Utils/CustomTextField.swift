@@ -11,7 +11,7 @@ struct CustomTextField: View {
         ZStack(alignment: .leading) {
             if text.isEmpty {
                 placeholder
-                    .foregroundColor(Color(.init(white: 1, alpha: 0.8)))
+                    .foregroundColor(.black)
                     .padding(.leading, 40)
             }
             
@@ -20,7 +20,7 @@ struct CustomTextField: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 20, height: 20)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                 
                 TextField("", text: $text)
                     .padding(.leading, 10)
@@ -42,11 +42,11 @@ struct BaseViewContainer <Content : View> : View {
     var body: some View {
         content
             .padding()
-            .foregroundColor(.red)
+            .foregroundColor(Color("koyuyesil"))
             .font(labelFont)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.green, lineWidth: 3)
+                    .stroke(Color("kahve"), lineWidth: 3)
             )
     }
 }
@@ -65,7 +65,7 @@ struct AppButtonStyle: ButtonStyle {
             .foregroundColor(.white)
             .offset(y: -1)
             .frame(height: 30)
-            .background(Color.green)
+            .background(Color("koyuyesil"))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .scaleEffect(configuration.isPressed ? 0.9 : 1)
             .opacity(configuration.isPressed ? 0.6 : 1)
@@ -87,7 +87,7 @@ struct AppButtonStyle2: ButtonStyle {
             .foregroundColor(.white)
             .offset(y: -1)
             .frame(height: 30)
-            .background(Color.red)
+            .background(Color("kucukmor"))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .scaleEffect(configuration.isPressed ? 0.9 : 1)
             .opacity(configuration.isPressed ? 0.6 : 1)

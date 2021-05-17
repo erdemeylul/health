@@ -36,7 +36,7 @@ struct RegistrationView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [Color("arkaplan"), Color("krem")]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
             VStack {
@@ -56,7 +56,7 @@ struct RegistrationView: View {
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 140, height: 140)
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
                         }).sheet(isPresented: $imagePickerPresented, onDismiss: loadImage, content: {
                             ImagePicker(image: $selectedImage, sourceType: $sourceType)
                         })
@@ -68,7 +68,7 @@ struct RegistrationView: View {
                         .padding()
                         .background(Color(.init(white: 1, alpha: 0.15)))
                         .cornerRadius(10)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                         .padding(.horizontal, 32)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
@@ -77,7 +77,7 @@ struct RegistrationView: View {
                         .padding()
                         .background(Color(.init(white: 1, alpha: 0.15)))
                         .cornerRadius(10)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                         .padding(.horizontal, 32)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
@@ -86,7 +86,7 @@ struct RegistrationView: View {
                         .padding()
                         .background(Color(.init(white: 1, alpha: 0.15)))
                         .cornerRadius(10)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                         .padding(.horizontal, 32)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
@@ -96,7 +96,7 @@ struct RegistrationView: View {
                         .padding()
                         .background(Color(.init(white: 1, alpha: 0.15)))
                         .cornerRadius(10)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                         .padding(.horizontal, 32)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
@@ -106,12 +106,11 @@ struct RegistrationView: View {
                                 Text("Rolünüzü Seçiniz: ")
                                 Text(role)
                             }.font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .padding()
                             .padding(.horizontal)
-                            .background(Color.orange)
+                            .background(Color("kahve"))
                             .cornerRadius(10)
-                            .shadow(color: Color.blue.opacity(0.4), radius: 10, x: 0, y: 10)
                            ,
                            content: {
                         Text("üretici").tag("üretici")
@@ -126,9 +125,9 @@ struct RegistrationView: View {
                 }, label: {
                     Text("Kayıt Ol")
                         .font(.headline)
-                        .foregroundColor(email != "" && password != "" && username != "" && role != "" && city != "" && image != nil ? .white : .gray)
+                        .foregroundColor(email != "" && password != "" && username != "" && role != "" && city != "" && image != nil ? .black : .white)
                         .frame(width: 360, height: 50)
-                        .background(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
+                        .background(Color("kahve"))
                         .clipShape(Capsule())
                         .padding()
                 }).disabled(email != "" && password != "" && username != "" && role != "" && city != "" && image != nil ? false : true)
@@ -145,7 +144,7 @@ struct RegistrationView: View {
                         
                         Text("Giriş Yap")
                             .font(.system(size: 14, weight: .semibold))
-                    }.foregroundColor(.white)
+                    }.foregroundColor(.black)
                 })
                 
                 

@@ -11,21 +11,20 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Color("arkaplan"), Color("krem")]), startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
                 
                 
                 VStack {
-                    Text("Burada Logo olcak")
+                    Text("")
                         .frame(width: 220, height: 100)
-                        .foregroundColor(.white)
                                         
                     VStack(spacing: 20) {
                         CustomTextField(text: $email, placeholder: Text("E-Posta"), imageName: "envelope")
                             .padding()
                             .background(Color(.init(white: 1, alpha: 0.15)))
                             .cornerRadius(10)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .padding(.horizontal, 32)
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
@@ -34,7 +33,7 @@ struct LoginView: View {
                             .padding()
                             .background(Color(.init(white: 1, alpha: 0.15)))
                             .cornerRadius(10)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .padding(.horizontal, 32)
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
@@ -48,7 +47,7 @@ struct LoginView: View {
                             label: {
                                 Text("Şifrenizi mi unuttunuz?")
                                     .font(.system(size: 13, weight: .semibold))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.black)
                                     .padding(.top)
                                     .padding(.trailing, 28)
                             })
@@ -60,9 +59,9 @@ struct LoginView: View {
                     }, label: {
                         Text("Giriş Yap")
                             .font(.headline)
-                            .foregroundColor(email != "" && password != "" ? .white : .gray)
+                            .foregroundColor(email != "" && password != "" ? .black : .white)
                             .frame(width: 360, height: 50)
-                            .background(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
+                            .background(Color("kahve"))
                             .clipShape(Capsule())
                             .padding()
                     }).disabled(email != "" && password != "" ? false : true)
@@ -78,7 +77,7 @@ struct LoginView: View {
                                 
                                 Text("Kayıt Ol")
                                     .font(.system(size: 14, weight: .semibold))
-                            }.foregroundColor(.white)
+                            }.foregroundColor(.black)
                         }).padding(.bottom, 16)
                 }
                 .padding(.top, -44)

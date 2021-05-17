@@ -35,10 +35,10 @@ struct PhotoUploadView: View {
                     Text("RESİM ÇEK".uppercased())
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        .foregroundColor(Color.orange)
+                        .foregroundColor(Color("krem"))
                 })
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                .background(Color.purple)
+                .background(Color("arkaplan"))
                 
                 Button(action: {
                     sourceType = UIImagePickerController.SourceType.photoLibrary
@@ -47,10 +47,10 @@ struct PhotoUploadView: View {
                     Text("RESİM AKTAR".uppercased())
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        .foregroundColor(Color.purple)
+                        .foregroundColor(Color("arkaplan"))
                 })
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                .background(Color.orange)
+                .background(Color("krem"))
 
             }
             .sheet(isPresented: $showImagePicker, onDismiss:segueToPostImageView, content: {
@@ -99,11 +99,7 @@ extension PhotoUploadView {
 
 
 
-struct PhotoUploadView_Previews: PreviewProvider {
-    static var previews: some View {
-        PhotoUploadView(tabIndex: .constant(0))
-    }
-}
+
 
 
 

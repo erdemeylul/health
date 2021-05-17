@@ -30,7 +30,7 @@ struct EditBio: View {
             TextArea(text: $bioText, placeholder: "Bilgi Ekleyin...")
                 .frame(width: 370, height: 200)
                 .padding()
-                .background(Color.purple.opacity(0.25))
+                .background(Color("arkaplan"))
             
             Spacer()
             
@@ -38,19 +38,19 @@ struct EditBio: View {
               ZStack {
                 AnimatedWave(width: geometry.size.width,
                              heightStartingPoint: geometry.size.height / 2 + 150, heightEndingPoint: geometry.size.height)
-                  .foregroundColor(Color.purple.opacity(0.3))
+                  .foregroundColor(Color("arkaplan"))
                 
                 AnimatedWave(width: geometry.size.width * 1.2,
                              heightStartingPoint: geometry.size.height / 2 + 150, heightEndingPoint: geometry.size.height,
                              waveAmplitude: 150,
                              animationDuration: 12)
-                  .foregroundColor(Color.pink.opacity(0.4))
+                  .foregroundColor(Color("kucukmor"))
                 
                 AnimatedWave(width: geometry.size.width * 2,
                              heightStartingPoint: geometry.size.height / 2 + 150, heightEndingPoint: geometry.size.height,
                              waveAmplitude: 200,
                              animationDuration: 10)
-                  .foregroundColor(Color.blue.opacity(0.4))
+                  .foregroundColor(Color("kahve"))
               }
             }
             .ignoresSafeArea(.all)

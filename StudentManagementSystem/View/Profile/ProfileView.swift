@@ -99,13 +99,14 @@ struct ProfileView: View {
                         if viewModel.user.isCurrentUser {
                             Button(action: { showEditProfile.toggle() }, label: {
                                 Text("Bilgiyi Güncelleyin")
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .frame(width: 360, height: 32)
-                                    .foregroundColor(.primary)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 3)
-                                            .stroke(Color.gray, lineWidth: 1)
-                                    )
+                                    .padding(20)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color.neuBackground)
+                                        )
+                                    .shadow(color: .dropShadow, radius: 15, x: 10, y: 10)
+                                    .shadow(color: .dropLight, radius: 15, x: -10, y: -10)
+                                    .foregroundColor(Color("koyuyesil"))
                             }).sheet(isPresented: $showEditProfile) {
                                 //EditProfileView(user: $viewModel.user)
                                 EditBio(viewModel: ProfileViewModel(user: viewModel.user), bioText: $viewModel.bio)
@@ -119,7 +120,7 @@ struct ProfileView: View {
                                         if viewModel.ratingMean.count > 0 {
                                             ZStack{
                                                 Circle()
-                                                    .foregroundColor(Color.green)
+                                                    .foregroundColor(Color("arkaplan"))
                                                     .frame(width: 60, height: 60)
                                                 Text("\(Double(Double(viewModel.total) / Double(viewModel.ratingMean.count)).rounded(toPlaces: 1).removeZerosFromEnd())")
                                                     .fontWeight(.bold)
@@ -142,7 +143,7 @@ struct ProfileView: View {
                                             .font(.system(size: 14, weight: .semibold))
                                             .frame(width: 172, height: 32)
                                             .foregroundColor(isFollowed ? .black : .white)
-                                            .background(isFollowed ? Color.white : Color.blue)
+                                            .background(isFollowed ? Color("krem") : Color("koyuyesil"))
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 3)
                                                     .stroke(Color.gray, lineWidth: isFollowed ? 1 : 0)
@@ -163,8 +164,6 @@ struct ProfileView: View {
                                 }
                                 .onAppear{
                                     viewModel.getRating()
-                                    print(viewModel.user.role)
-
                                 }
                                 if viewModel.user.role == "üretici" && model.currentUser?.role == "tüketici" && !viewModel.ratingOwners.contains(model.userSession?.uid ?? "")
                                 {
@@ -176,7 +175,6 @@ struct ProfileView: View {
                                                     .foregroundColor(Int(viewModel.rating) >= index ? Color.yellow : Color.gray)
                                                     .onTapGesture {
                                                         viewModel.rating = Double(index)
-                                                        print(viewModel.rating)
                                                     }
                                             }
                                             Button {
@@ -186,7 +184,7 @@ struct ProfileView: View {
                                             } label: {
                                                 HStack {
                                                         Image(systemName: "star.square.fill")
-                                                        Text("Paylaş")
+                                                        Text("Puan ver")
                                                 }
                                             }.buttonStyle(GradientButtonStyle())
                                             
@@ -200,7 +198,6 @@ struct ProfileView: View {
                     }.padding(.top)
                 }
                 
-                //PostGridView(config: .profile(user.id ?? ""))
                 ProfilePosts(viewModel: ProfileViewModel(user: viewModel.user))
             }
             .padding(.top)
@@ -235,5 +232,26 @@ extension Double {
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 16 //maximum digits in Double after dot (maximum precision)
         return String(formatter.string(from: number) ?? "")
+    }
+}
+
+extension Color {
+    static let neuBackground = Color(hex: "f0f0f3")
+    static let dropShadow = Color(hex: "aeaec0").opacity(0.4)
+    static let dropLight = Color(hex: "ffffff")
+}
+
+extension Color {
+    init(hex: String) {
+        let scanner = Scanner(string: hex)
+        scanner.currentIndex = scanner.string.startIndex
+        var rgbValue: UInt64 = 0
+        scanner.scanHexInt64(&rgbValue)
+
+        let r = (rgbValue & 0xff0000) >> 16
+        let g = (rgbValue & 0xff00) >> 8
+        let b = rgbValue & 0xff
+
+        self.init(red: Double(r) / 0xff, green: Double(g) / 0xff, blue: Double(b) / 0xff)
     }
 }

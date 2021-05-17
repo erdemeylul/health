@@ -62,7 +62,7 @@ struct ChatView: View {
                 Text(username)
                 .font(.system(size: 14, weight: .semibold))
                 Spacer()
-            }.background(Color.purple.opacity(0.23))
+            }.background(Color.white)
             .padding(.bottom, -8)
 
                 ScrollView{
@@ -80,15 +80,6 @@ struct ChatView: View {
                         }
                         .onAppear{
                             scrollProxy = scrollView
-//                            cancellables = model.$messages.sink{messages in
-//                                if messages.count > 0 {
-//                                    DispatchQueue.main.async{
-//                                        withAnimation{
-//                                            scrollView.scrollTo(messages[messages.endIndex - 1].self, anchor: .bottom)
-//                                        }
-//                                    }
-//                                }
-//                            }
                         }
                     }
                 }.navigationBarHidden(true)
@@ -119,13 +110,12 @@ struct ChatView: View {
                     Image(systemName: "leaf.fill")
                         .font(.system(size:33))
                         .aspectRatio(contentMode: .fit)
-                        .foregroundColor(message.count > 0 ? Color.green : Color.gray)
+                        .foregroundColor(message.count > 0 ? Color("koyuyesil") : Color.gray)
                         .animation(.default)
                         .frame(width: 60, height:60)
                 })
                 
             }
-            .padding()
         }.onAppear{
             model.otherUsername = otherUsername
             model.observeChat()

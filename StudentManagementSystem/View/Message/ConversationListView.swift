@@ -26,7 +26,6 @@ struct ConversationListView: View {
 
                 BaseViewContainer {
                             Text("Posta Kutusu")
-                            //Image(systemName: "envelope.fill")
                 }.padding(.top, -70)
                 .padding(.bottom, 20)
                 
@@ -80,7 +79,7 @@ struct ConversationListView: View {
                             }
                             Rectangle()
                                 .frame(width: UIScreen.main.bounds.width - 20, height: 1, alignment: .center).padding(.top, -15)
-                                .foregroundColor(Color.green)
+                                .foregroundColor(Color("kahve"))
 
                         } //endofVStack
 
