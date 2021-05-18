@@ -18,6 +18,8 @@ struct RegistrationView: View {
     
     @State var makeAble = false
     @State var show = false
+    @State var showProgress: Bool = false
+
     
     init() {
         //this changes the "thumb" that selects between items
@@ -121,6 +123,7 @@ struct RegistrationView: View {
                 
                 Button(action: {
                     viewModel.resgister(withEmail: email, password: password, image: selectedImage, username: username, role: role, city: city)
+                    showProgress = true
                     
                 }, label: {
                     Text("Kayıt Ol")
@@ -132,8 +135,9 @@ struct RegistrationView: View {
                         .padding()
                 }).disabled(email != "" && password != "" && username != "" && role != "" && city != "" && image != nil ? false : true)
                 
-                
-
+                if showProgress{
+                    ProgressView()
+                }
                 
                 Spacer()
                 

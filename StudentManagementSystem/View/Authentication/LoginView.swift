@@ -7,6 +7,8 @@ struct LoginView: View {
     @State private var password = ""
     @EnvironmentObject var viewModel: AuthViewModel
     @State var show =  false
+    @State var showProgress: Bool = false
+
     
     var body: some View {
         NavigationView {
@@ -55,7 +57,7 @@ struct LoginView: View {
                                         
                     Button(action: {
                         viewModel.login(withEmail: email, password: password)
-   
+                        showProgress = true
                     }, label: {
                         Text("Giriş Yap")
                             .font(.headline)
@@ -65,6 +67,10 @@ struct LoginView: View {
                             .clipShape(Capsule())
                             .padding()
                     }).disabled(email != "" && password != "" ? false : true)
+                    
+                    if showProgress{
+                        ProgressView()
+                    }
                     
                     Spacer()
                     

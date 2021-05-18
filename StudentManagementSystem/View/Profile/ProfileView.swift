@@ -18,6 +18,8 @@ struct ProfileView: View {
     @State private var selectedImage: UIImage?
     @State private var image: Image?
     
+    @State var point = false
+    
     @State var imagePickerPresented = false
     @State var sourceType: UIImagePickerController.SourceType = UIImagePickerController.SourceType.photoLibrary
     
@@ -175,12 +177,14 @@ struct ProfileView: View {
                                                     .foregroundColor(Int(viewModel.rating) >= index ? Color.yellow : Color.gray)
                                                     .onTapGesture {
                                                         viewModel.rating = Double(index)
+                                                        point = true
                                                     }
                                             }
                                             Button {
-                                                viewModel.recordRating(rating: viewModel.rating, userId: viewModel.user.id ?? "")
-                                                viewModel.getRating()
-
+                                                if point{
+                                                    viewModel.recordRating(rating: viewModel.rating, userId: viewModel.user.id ?? "")
+                                                    viewModel.getRating()
+                                                }
                                             } label: {
                                                 HStack {
                                                         Image(systemName: "star.square.fill")
