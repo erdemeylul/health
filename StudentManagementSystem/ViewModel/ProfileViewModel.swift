@@ -44,9 +44,7 @@ class ProfileViewModel: ObservableObject{
             self.user.isFollowed = true
             self.fetchUserFollowers()
             self.fetchUserFollowing()
-            //FeedViewModel.shared.fetchFollowers()
-
-            
+            AuthViewModel.shared.final = true
         }
     }
     
@@ -56,8 +54,7 @@ class ProfileViewModel: ObservableObject{
             self.user.isFollowed = false
             self.fetchUserFollowers()
             self.fetchUserFollowing()
-            //FeedViewModel.shared.fetchFollowers()
-
+            AuthViewModel.shared.final = true
         }
     }
     
@@ -97,12 +94,7 @@ class ProfileViewModel: ObservableObject{
             self.followers = snapshot?.documents.count ?? 0
         }
     }
-    func fetchUserPosts(){
-        guard let uid = user.id else {return}
-        Firestore.firestore().collection("posts").whereField("ownerUid", isEqualTo: uid).getDocuments { snapshot, _ in
-            self.posts = snapshot?.documents.count ?? 0
-        }
-    }
+ 
     
     func saveUserBio(_ bio: String){
         guard let uid = user.id else {return}
@@ -169,6 +161,13 @@ class ProfileViewModel: ObservableObject{
             guard let documents = snapshot?.documents else {return}
             let posts = documents.compactMap({try? $0.data(as: Post.self)})
             self.userPosts = posts.sorted(by: {$0.timestamp.dateValue() > $1.timestamp.dateValue()})
+        }
+    }
+    
+    func fetchUserPosts(){
+        guard let uid = user.id else {return}
+        Firestore.firestore().collection("posts").whereField("ownerUid", isEqualTo: uid).getDocuments { snapshot, _ in
+            self.posts = snapshot?.documents.count ?? 0
         }
     }
 }

@@ -207,10 +207,13 @@ struct ProfileView: View {
             .padding(.top)
         }.onAppear{
             viewModel.fetchBio()
-            viewModel.fetchUserPosts()
             viewModel.fetchUserFollowing()
             viewModel.fetchUserFollowers()
-            viewModel.fetchUserPostsAll()
+            if AuthViewModel.shared.fin{
+                viewModel.fetchUserPostsAll()
+                viewModel.fetchUserPosts()
+            }
+            AuthViewModel.shared.fin = false
         }
     }
 }

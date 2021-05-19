@@ -3,6 +3,7 @@
 import SwiftUI
 import Kingfisher
 import URLImage
+import Firebase
 
 struct FeedCell: View {
     @ObservedObject var viewModel: FeedCellViewModel
@@ -14,6 +15,8 @@ struct FeedCell: View {
     var didLike: Bool { return viewModel.post.didLike ?? false }
     
     @State var showActionSheet = false
+    
+    
     
     init(viewModel: FeedCellViewModel) {
         self.viewModel = viewModel
@@ -52,7 +55,8 @@ struct FeedCell: View {
                         }
                     }
                 }
-            }.frame(minHeight: 45)
+            }
+            .frame(minHeight: 45)
             .padding(.bottom, 8)
             .padding(.leading, 8)
             .padding(.trailing, 12)
@@ -116,6 +120,7 @@ struct FeedCell: View {
                 .padding(.top, -2)
         }
     }
+    
     
     func  getActionSheet() -> ActionSheet{
         return ActionSheet(title: Text("Paylaşımı silmek ister misiniz?"), message: nil, buttons: [

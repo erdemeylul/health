@@ -71,6 +71,8 @@ struct PostImageView: View {
                             showAlert.toggle()
                             showProgress = false
                         }
+                        AuthViewModel.shared.final = true
+                        AuthViewModel.shared.fin = true
                     }
                 }, label: {
                     Text("Yükle!".uppercased())

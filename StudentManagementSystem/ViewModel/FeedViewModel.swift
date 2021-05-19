@@ -13,7 +13,7 @@ class FeedViewModel: ObservableObject{
     
     init(){
         //fetchPosts()
-        //fetchFollowers()
+        fetchFollowers()
         //fetchFollowingPosts()
     }
     
@@ -39,21 +39,6 @@ class FeedViewModel: ObservableObject{
                 }
             }
         }
-        //print("DEBUG fetch followers")
+        print("DEBUG EN ONEMLI")
     }
-    
-//    func fetchFollowingPosts(){
-//        if self.users.count > 0{
-//            Firestore.firestore().collection("posts").whereField("ownerUid", in: self.users).getDocuments { (snapshot, _) in
-//                guard let documents = snapshot?.documents else {return print("no users")}
-//                self.posts = documents.compactMap({try? $0.data(as: Post.self)})
-//                print(self.posts)
-//                print("hehe")
-//            }
-//        }else{
-//            print("")
-//        }
-//    }
-    
-    
 }

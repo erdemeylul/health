@@ -13,6 +13,8 @@ class AuthViewModel: ObservableObject{
     @Published var currentUser: User?
     @Published var didSendResetPasswordLink = false
     @Published var show = false
+    @Published var final = false
+    @Published var fin = false
     
     static let shared = AuthViewModel()
     

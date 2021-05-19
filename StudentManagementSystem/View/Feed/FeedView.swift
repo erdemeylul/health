@@ -9,8 +9,6 @@ import SwiftUI
 
 struct FeedView: View {
     @StateObject var viewModel = FeedViewModel()
-    @EnvironmentObject var model: AuthViewModel
-    @State var show = false
 
     
     var body: some View {
@@ -23,11 +21,12 @@ struct FeedView: View {
                         FeedCell(viewModel: FeedCellViewModel(post: post))
                     }
                 }
-            }.onAppear{
-                viewModel.fetchFollowers()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    show = true
+            }
+            .onAppear{
+                if AuthViewModel.shared.final{
+                    viewModel.fetchFollowers()
                 }
+                AuthViewModel.shared.final = false
             }
             .padding(.top)
         }
