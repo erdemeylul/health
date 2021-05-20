@@ -21,6 +21,7 @@ struct TextArea: View {
             }
             
             TextEditor(text: $text)
+                .foregroundColor(.black)
                 .padding(4)
         }
         .font(.body)

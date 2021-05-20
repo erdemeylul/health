@@ -9,15 +9,15 @@ struct PostGridView: View {
     private let width = UIScreen.main.bounds.width / 3
 
     let config: PostGridConfiguration
-    @ObservedObject var viewModel: PostGridViewModel
+    @StateObject var viewModel = PostGridViewModel(config: .explore)
     
 
     @State var isPresented = false
     
-    init(config: PostGridConfiguration) {
-        self.config = config
-        self.viewModel = PostGridViewModel(config: config)
-    }
+//    init(config: PostGridConfiguration) {
+//        self.config = config
+//        self.viewModel = PostGridViewModel(config: config)
+//    }
     
     var body: some View {
         VStack{

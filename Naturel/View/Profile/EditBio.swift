@@ -20,6 +20,7 @@ struct EditBio: View {
                 
                 Button(action: {
                     viewModel.saveUserBio(bioText)
+                    AuthViewModel.shared.finBio = true
                     mode.wrappedValue.dismiss()
                 }, label: {
                     Text("Kabul").bold()

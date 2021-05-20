@@ -138,7 +138,7 @@
 		CAFBC17A263AA31E0062D898 /* ConversationListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListView.swift; sourceTree = "<group>"; };
 		CAFBC17D263AA3CF0062D898 /* SearchView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView2.swift; sourceTree = "<group>"; };
 		CAFBC181263AA6E30062D898 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		CAFBDBAB262B1C190015E04D /* StudentManagementSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudentManagementSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAFBDBAB262B1C190015E04D /* Naturel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Naturel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFBDBAE262B1C190015E04D /* StudentManagementSystemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentManagementSystemApp.swift; sourceTree = "<group>"; };
 		CAFBDBB2262B1C1D0015E04D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAFBDBB5262B1C1D0015E04D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 		CAFBDBA2262B1C190015E04D = {
 			isa = PBXGroup;
 			children = (
-				CAFBDBAD262B1C190015E04D /* StudentManagementSystem */,
+				CAFBDBAD262B1C190015E04D /* Naturel */,
 				CAFBDBAC262B1C190015E04D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -299,12 +299,12 @@
 		CAFBDBAC262B1C190015E04D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CAFBDBAB262B1C190015E04D /* StudentManagementSystem.app */,
+				CAFBDBAB262B1C190015E04D /* Naturel.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CAFBDBAD262B1C190015E04D /* StudentManagementSystem */ = {
+		CAFBDBAD262B1C190015E04D /* Naturel */ = {
 			isa = PBXGroup;
 			children = (
 				CA1C7C11262C3114004D96C3 /* MainTabView */,
@@ -319,7 +319,7 @@
 				CA63B3AD2631BE070002987C /* GoogleService-Info.plist */,
 				CAFBDBB4262B1C1D0015E04D /* Preview Content */,
 			);
-			path = StudentManagementSystem;
+			path = Naturel;
 			sourceTree = "<group>";
 		};
 		CAFBDBB4262B1C1D0015E04D /* Preview Content */ = {
@@ -452,9 +452,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CAFBDBAA262B1C190015E04D /* StudentManagementSystem */ = {
+		CAFBDBAA262B1C190015E04D /* Naturel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CAFBDBBA262B1C1D0015E04D /* Build configuration list for PBXNativeTarget "StudentManagementSystem" */;
+			buildConfigurationList = CAFBDBBA262B1C1D0015E04D /* Build configuration list for PBXNativeTarget "Naturel" */;
 			buildPhases = (
 				CAFBDBA7262B1C190015E04D /* Sources */,
 				CAFBDBA8262B1C190015E04D /* Frameworks */,
@@ -464,7 +464,7 @@
 			);
 			dependencies = (
 			);
-			name = StudentManagementSystem;
+			name = Naturel;
 			packageProductDependencies = (
 				CAFBDC3D262B22E80015E04D /* Kingfisher */,
 				CAFBDC41262B257D0015E04D /* FirebaseFunctions */,
@@ -475,7 +475,7 @@
 				CA55A54826398C7D0045511B /* URLImage */,
 			);
 			productName = StudentManagementSystem;
-			productReference = CAFBDBAB262B1C190015E04D /* StudentManagementSystem.app */;
+			productReference = CAFBDBAB262B1C190015E04D /* Naturel.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -492,7 +492,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CAFBDBA6262B1C190015E04D /* Build configuration list for PBXProject "StudentManagementSystem" */;
+			buildConfigurationList = CAFBDBA6262B1C190015E04D /* Build configuration list for PBXProject "Naturel" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -510,7 +510,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CAFBDBAA262B1C190015E04D /* StudentManagementSystem */,
+				CAFBDBAA262B1C190015E04D /* Naturel */,
 			);
 		};
 /* End PBXProject section */
@@ -728,17 +728,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"StudentManagementSystem/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Naturel/Preview Content\"";
 				DEVELOPMENT_TEAM = 48R5R4VQ57;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = StudentManagementSystem/Info.plist;
+				INFOPLIST_FILE = Naturel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.erdemsenol.StudentManagementSystem;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.erdemsenol.Naturel;
+				PRODUCT_NAME = Naturel;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -750,17 +750,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"StudentManagementSystem/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Naturel/Preview Content\"";
 				DEVELOPMENT_TEAM = 48R5R4VQ57;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = StudentManagementSystem/Info.plist;
+				INFOPLIST_FILE = Naturel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.erdemsenol.StudentManagementSystem;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.erdemsenol.Naturel;
+				PRODUCT_NAME = Naturel;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -769,7 +769,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CAFBDBA6262B1C190015E04D /* Build configuration list for PBXProject "StudentManagementSystem" */ = {
+		CAFBDBA6262B1C190015E04D /* Build configuration list for PBXProject "Naturel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CAFBDBB8262B1C1D0015E04D /* Debug */,
@@ -778,7 +778,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CAFBDBBA262B1C1D0015E04D /* Build configuration list for PBXNativeTarget "StudentManagementSystem" */ = {
+		CAFBDBBA262B1C1D0015E04D /* Build configuration list for PBXNativeTarget "Naturel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CAFBDBBB262B1C1D0015E04D /* Debug */,

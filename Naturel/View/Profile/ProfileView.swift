@@ -208,14 +208,20 @@ struct ProfileView: View {
             }
             .padding(.top)
         }.onAppear{
-            viewModel.fetchBio()
+            if AuthViewModel.shared.finBio{
+                viewModel.fetchBio()
+            }
             viewModel.fetchUserFollowing()
             viewModel.fetchUserFollowers()
-            if AuthViewModel.shared.fin{
+            if AuthViewModel.shared.finPic{
+                print("\(AuthViewModel.shared.finPic)")
                 viewModel.fetchUserPostsAll()
                 viewModel.fetchUserPosts()
             }
-            AuthViewModel.shared.fin = false
+            AuthViewModel.shared.finPic = false
+            AuthViewModel.shared.finBio = false
+
+            print("\(AuthViewModel.shared.finPic)")
         }
     }
 }

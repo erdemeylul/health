@@ -84,7 +84,7 @@ struct PostFeed: View {
                     ActionSheet(title: Text("Paylaşımı silmek mi istiyorsun?"), message: nil, buttons: [
                         .default(Text("Sil")){
                             viewModel.deletePost()
-                            AuthViewModel.shared.fin = true
+                            AuthViewModel.shared.finPic = true
                             presentationMode.wrappedValue.dismiss()
                         },
                         .cancel()

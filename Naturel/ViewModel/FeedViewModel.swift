@@ -39,6 +39,5 @@ class FeedViewModel: ObservableObject{
                 }
             }
         }
-        print("DEBUG EN ONEMLI")
     }
 }
