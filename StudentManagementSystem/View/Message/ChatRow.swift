@@ -35,12 +35,12 @@ struct ChatRow: View {
             }
             HStack{
                 Text(text)
-                    .foregroundColor(isSender ? Color.white : Color(.label))
+                    .foregroundColor(isSender ? Color.white : Color.black)
                     .padding()
                     .lineLimit(nil)
             }.background(isSender ? Color("kucukmor") : Color("krem"))
             .cornerRadius(12)
-            .shadow(color: .gray, radius: 2, x: -5, y: 5)
+            .shadow(color: .gray, radius: 1, x: -5, y: 4)
             if !isSender {Spacer()}
         }
     }

@@ -10,7 +10,7 @@ struct OnboardingView: View {
     OnboardingItem(imageName: "1", title: "Doğal ürün üreticisiyim", description: "O zaman öncelikle kayıt sayfasında `üretici` bölmesini seç ve üretim yaptığın `şehri` belirt. Peynir, süt, reçel, yoğurt, kefir, salça, turşu, zeytin, bal, zeytinyağı gibi ürünlerin yaninda, ev yemekleri üreticilerinin ürünleri de uygulama kapsamına dahildir."),
     OnboardingItem(imageName: "2", title: "Kendimi nasıl gösteririm?", description: "Profil sayfanı detaylı olarak doldur ve yaptığın harika urunleri resimlerle paylaş. Unutma, güzel resimler çekmek işin sadece gösteriş kısmı. Yaptıklarının kalitesi ve prensipli çalışma ilkelerin tüketicilerden alacağın puanı belileyecek"),
     OnboardingItem(imageName: "3", title: "Doğal beslenmeliyim!", description: "Kendin ve ailen için en sağlıklı yolu seçtin! Kar etmeyi iş etiğinin önüne koyan dev işletmelerin sunduğu tehlikeli paketli gıdalardan sakınmak herkes için bir seçenek olmalı. İşte bu seçenek artık parmaklarının ucunda."),
-    OnboardingItem(imageName: "4", title: "Üreticilere nasıl ulaşırım?", description: "Kayıt sayfasında `tüketici` bölmesini seç ve yaşadiğin `şehri` belirt. Uygulamaya girince keşfet bölmesinden isim veya şehir bazlı arama yapabilirsin. Üreticileri takip etmeye başladıkça uygulamanın ana ekranı leziz ürünlerle dolacak!")
+    OnboardingItem(imageName: "4", title: "Üreticilere nasıl ulaşırım?", description: "Kayıt sayfasında `tüketici` bölmesini seç ve yaşadiğin `şehri` belirt. Uygulamaya girince ana sayfan boş olacak ama keşfet bölmesinden isim veya şehir bazlı arama yaparak üreticileri takip etmeye başladıkça ana sayfan leziz ürünlerle dolacak!")
   ]
   
   var body: some View {
@@ -27,17 +27,20 @@ struct OnboardingView: View {
                           Text("HAYDİ BAŞLAYALIM!")
                             .frame(maxWidth: .infinity)
                             .padding()
+                            .font(.system(size: 22, weight: .bold, design: .serif))
                             .foregroundColor(Color("kucukmor"))
                             .background(LinearGradient(gradient: Gradient(colors: [Color("arkaplan"), Color("kahve")]), startPoint: .leading, endPoint: .trailing))
                             .cornerRadius(10)
                             .padding(20)
+                            .shadow(color: Color("koyuyesil"), radius: 5, x: 5, y: 5)
+                            .shadow(color: Color("arkaplan"), radius: 5, x: -5, y: -5)
                       })
                 }
             }
           }
           .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
           .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        }
+        }.navigationBarHidden(true)
     }.onAppear{
         UserDefaults.standard.set(true, forKey: "didLaunchBefore")
     }

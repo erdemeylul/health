@@ -27,6 +27,7 @@ struct FeedView: View {
                     viewModel.fetchFollowers()
                 }
                 AuthViewModel.shared.final = false
+                AppReviewRequest.requestReviewIfNeeded()
             }
             .padding(.top)
         }

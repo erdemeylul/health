@@ -18,7 +18,7 @@ struct MainTabView: View {
                         selectedIndex = 0
                     }
                     .tabItem {
-                        Image(systemName: "house")
+                        Image(systemName: selectedIndex == 0 ? "house.fill" : "house")
                     }.tag(0)
                 
                 SearchView()
@@ -26,7 +26,7 @@ struct MainTabView: View {
                         selectedIndex = 1
                     }
                     .tabItem {
-                        Image(systemName: "magnifyingglass")
+                        Image(systemName: selectedIndex == 1 ? "ladybug.fill" : "ladybug")
                     }.tag(1)
                 
                 PhotoUploadView(tabIndex: $selectedIndex)
@@ -34,7 +34,7 @@ struct MainTabView: View {
                         selectedIndex = 2
                     }
                     .tabItem {
-                        Image(systemName: "plus.square")
+                        Image(systemName: selectedIndex == 2 ? "leaf.fill" : "leaf")
                     }.tag(2)
                 
                 NotificationsView()
@@ -42,7 +42,7 @@ struct MainTabView: View {
                         selectedIndex = 3
                     }
                     .tabItem {
-                        Image(systemName: "heart")
+                        Image(systemName: selectedIndex == 3 ? "newspaper.fill" : "newspaper")
                     }.tag(3)
                 
                 ProfileView(user: user)
@@ -50,7 +50,7 @@ struct MainTabView: View {
                         selectedIndex = 4
                     }
                     .tabItem {
-                        Image(systemName: "person")
+                        Image(systemName: selectedIndex == 4 ? "person.fill" : "person")
                     }.tag(4)
             }
             .navigationTitle(tabTitle)
@@ -75,7 +75,7 @@ struct MainTabView: View {
                 }))
 
             .accentColor(Color("koyuyesil"))
-        }
+        }.accentColor(Color("koyuyesil"))
     }
     
     var logoutButton: some View {
@@ -92,7 +92,7 @@ struct MainTabView: View {
         switch selectedIndex {
         case 0: return "Ana Sayfa"
         case 1: return "Keşfet"
-        case 2: return "Paylaşım"
+        case 2: return "Paylaş"
         case 3: return "Bildirimler"
         case 4: return "Profil"
 

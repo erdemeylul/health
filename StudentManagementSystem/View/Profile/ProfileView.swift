@@ -9,6 +9,9 @@ struct ProfileView: View {
     var uid: String?
     @ObservedObject var viewModel: ProfileViewModel
     
+    @Environment(\.colorScheme) var colorScheme
+
+    
     @EnvironmentObject var model: AuthViewModel
     var isFollowed: Bool { return viewModel.user.isFollowed ?? false }
     @State var showEditProfile = false
@@ -106,8 +109,6 @@ struct ProfileView: View {
                                         RoundedRectangle(cornerRadius: 10)
                                             .fill(Color.neuBackground)
                                         )
-                                    .shadow(color: .dropShadow, radius: 15, x: 10, y: 10)
-                                    .shadow(color: .dropLight, radius: 15, x: -10, y: -10)
                                     .foregroundColor(Color("koyuyesil"))
                             }).sheet(isPresented: $showEditProfile) {
                                 //EditProfileView(user: $viewModel.user)
@@ -126,7 +127,7 @@ struct ProfileView: View {
                                                     .frame(width: 60, height: 60)
                                                 Text("\(Double(Double(viewModel.total) / Double(viewModel.ratingMean.count)).rounded(toPlaces: 1).removeZerosFromEnd())")
                                                     .fontWeight(.bold)
-                                                    .foregroundColor(.white)
+                                                    .foregroundColor(.orange)
                                                     .font(.system(size: 38))
                                             }
                                             Image(systemName: "star.fill")
@@ -189,6 +190,7 @@ struct ProfileView: View {
                                                 HStack {
                                                         Image(systemName: "star.square.fill")
                                                         Text("Puan ver")
+                                                            .foregroundColor(Color("koyuyesil"))
                                                 }
                                             }.buttonStyle(GradientButtonStyle())
                                             

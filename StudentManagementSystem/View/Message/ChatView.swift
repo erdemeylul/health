@@ -46,7 +46,9 @@ struct ChatView: View {
                 
             HStack{
                 Spacer()
-                Image(systemName: "chevron.left").onTapGesture {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.black)
+                    .onTapGesture {
                     presentationMode.wrappedValue.dismiss()
                 }
                 if userImageUrl.count > 0{
@@ -61,6 +63,7 @@ struct ChatView: View {
                 }
                 Text(username)
                 .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(.black)
                 Spacer()
             }.background(Color.white)
             .padding(.bottom, -8)
@@ -84,10 +87,8 @@ struct ChatView: View {
                     }
                 }.navigationBarHidden(true)
                 .background(Image("bg").resizable().scaledToFill())
-                .onChange(of: model.keyboardIsShowing) { (value) in
-                    if value{
+                .onChange(of: model.keyboardIsShowing) { _ in
                         scrollToBottom()
-                    }
                 }
                 .onChange(of: model.messages) { _ in
                     scrollToBottom()
@@ -119,12 +120,11 @@ struct ChatView: View {
         }.onAppear{
             model.otherUsername = otherUsername
             model.observeChat()
-            print(model.otherUsername)
-            print(model.messages)
             getUser()
         }
         .onTapGesture {
             hideKeyboard()
+            model.keyboardIsShowing = false
         }
     }
     

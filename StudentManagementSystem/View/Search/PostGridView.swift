@@ -34,11 +34,13 @@ struct PostGridView: View {
                                     .frame(width: width, height: width)
                                     .clipped()}
                         })
-                }.onAppear{
-                    if config == .explore {
-                        viewModel.fetchExplorePagePosts()
-                    }
                 }
+//                .onAppear{
+//                    if config == .explore && AuthViewModel.shared.fin {
+//                        viewModel.fetchExplorePagePosts()
+//                    }
+//                    AuthViewModel.shared.fin = false
+//                }
             })
         }
     }
